@@ -12,7 +12,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
     $scope.resultsStopDetails = true;
     $scope.resultsTerminateDetails = true;*/
 
-
+    $scope.imageId = "ami-5ee7443e";
     $scope.hideSensorManager = true;
     $scope.getUserSensorDetails = function () {
         $http({
@@ -46,7 +46,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
         }
     };
 
-/*    $scope.chooseSensorHub = function () {
+    $scope.chooseSensorHub = function () {
         $http({
             method : "POST",
             url : '/listsensorhub',
@@ -62,7 +62,97 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
         }).error(function(error) {
 
         });
-    }
+    };
+
+    $scope.getSensorTypeCount = function(){
+        $http({
+            method : "POST",
+            url : '/getSensorTypeCount',
+            data : {
+                "hubname" : $scope.hubname,
+                "sensorType": $scope.sensorType,
+                "username" : $cookies.get('username')
+            }
+        }).success(function(data) {
+            // checking the response data for statusCode
+            if (data.statusCode == 200) {
+                $scope.sensorTypeCount = data.count;
+            }
+        }).error(function(error) {
+
+        });
+    };
+
+    $scope.autoScale = function(){
+
+        if($scope.minimumCount > $scope.sensorTypeCount) {
+            $http.post(
+                'http://localhost:5000/api/v1/addToSensorHub',
+                {
+                    sensorhubname: $scope.sensorhubname,
+                    sensorType: $scope.sensorType,
+                    imageId: $scope.imageId,
+                    username: $cookies.get('username'),
+                    count: $scope.minimumCount - $scope.sensorTypeCount
+                },
+                {cors: true}
+                )
+                .success(function (data) {
+                    var result = JSON.parse(JSON.stringify(data));
+                    console.log(result.statusCode);
+                    console.log(result.instanceDetails);
+                    $scope.addedSensors = result.instanceDetails;
+                    $scope.addedResultsDetails = false;
+                })
+                .error(function (error) {
+                    console.log('error')
+                });
+
+        } else  if($scope.maximumCount < $scope.sensorTypeCount) {
+            $http.post(
+                'http://localhost:5000/api/v1/deleteFromSensorHub',
+                {
+                    sensorhubname: $scope.sensorhubname,
+                    sensorType: $scope.sensorType,
+                    imageId: $scope.imageId,
+                    username: $cookies.get('username'),
+                    count:  $scope.sensorTypeCount - $scope.maximumCount
+                },
+                {cors: true}
+                )
+                .success(function (data) {
+                    var result = JSON.parse(JSON.stringify(data));
+                    console.log(result.statusCode);
+                    console.log(result.instanceDetails);
+                    $scope.deletedSensors = result.instanceDetails;
+                    $scope.deletedResultsDetails = false;
+                })
+                .error(function (error) {
+                    console.log('error')
+                });
+
+            //$state.go('profile');
+        }
+
+
+        $http({
+            method : "POST",
+            url : '/getSensorTypeCount',
+            data : {
+                "hubname" : $scope.hubname,
+                "sensorType": $scope.sensorType,
+                "username" : $cookies.get('username')
+            }
+        }).success(function(data) {
+            // checking the response data for statusCode
+            if (data.statusCode == 200) {
+                $scope.sensorTypeCount = data.count;
+            }
+        }).error(function(error) {
+
+        });
+    };
+
 
     $scope.listSensor = function () {
         $http({
@@ -82,9 +172,9 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
         }).error(function(error) {
 
         });
+    };
 
-    }
-
+/*
     $scope.getSensorInstances = function () {
         console.log("HubName: "+ $scope.hubname + "username:" + $cookies.get('username') + "SensorType: "
             + $scope.sensortypename);

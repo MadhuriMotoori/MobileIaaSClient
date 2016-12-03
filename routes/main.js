@@ -20,7 +20,7 @@ exports.listuserSensorDetails = function (req, res) {
 
 exports.listsensorhub = function(req, res){
     var username = req.body.username;
-    var getHubName = "select distinct SensorHubName from usersensorhubdetails where username = '" + username + "';";
+    var getHubName = "select distinct SensorHubName from sensor where UserName = '" + username + "' and Status != 'terminated';";
     var hubnamelist = {};
     mysql.fetchData(function(err, results) {
         if (err) {
@@ -36,11 +36,27 @@ exports.listsensorhub = function(req, res){
     }, getHubName);
 };
 
+exports.getSensorTypeCount = function(req, res){
+    var username = req.body.username;
+    var sensorhubname = req.body.hubname;
+    var sensorType = req.body.sensorType;
+    var getSensorCount = "select *  from sensor where UserName = '" + username + "' and SensorHubName = '" + sensorhubname + "' and SensorType= '"+ sensorType + "' and Status != 'terminated';";
+    mysql.fetchData(function(err, results) {
+        if (err) {
+            throw err;
+        } else {
+
+            console.log(results);
+            var json_response={"statusCode":200,"count": results.length};
+            res.send(json_response);
+        }
+    }, getSensorCount);
+};
 
 exports.listsensors = function(req, res){
     var username = req.body.username;
     var sensorhubname = req.body.hubname;
-    var getSensorList = "select distinct SensorType from usersensorhubdetails where username = '" + username + "' and sensorhubname = '" + sensorhubname + "';";
+    var getSensorList = "select distinct SensorType from sensor where UserName = '" + username + "' and SensorHubName = '" + sensorhubname + "' and Status != 'terminated';";
     var sensorlist = {};
     mysql.fetchData(function(err, results) {
         if (err) {

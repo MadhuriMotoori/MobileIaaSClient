@@ -131,13 +131,17 @@
             .state('autoscaling', {
                 url: "/autoscaling",
                 views:{
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
+                    },
                     'sidemenu@':{
                         templateUrl: 'sidebarView.ejs',
                         controller: 'navBarController'
                     },
                     'main@':{
                         templateUrl: 'autoscaling.ejs',
-                        controller : 'autoscalingcontroller'
+                        controller : 'managementController'
                     }
                 },
                 params: { test: "default value" }
