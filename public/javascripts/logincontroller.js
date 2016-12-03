@@ -3,7 +3,6 @@
   app.controller('logincontroller',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies){
 
       $scope.signIn = function(){
-    //	  $state.go('profile', {'test':'hi'});
       $http.post(
                   'http://localhost:5000/api/v1/validate',
                   {

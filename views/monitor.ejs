@@ -1,40 +1,5 @@
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
-      integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
-<body class="home">
-<div class="container-fluid display-table">
-    <div class="row display-table-row" ng-controller="navBarController">
-        <div class="col-md-3 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
-            <div class="logo">
-                <a hef="home.html"><img src="./images/LogoBlue.png" alt="merkery_logo" class="hidden-xs hidden-sm">
-
-                </a>
-            </div>
-            <div class="navi">
-                <ul>
-                    <li ng-class="{active:isSelected(1)}"><a ng-click="select(1)" ui-sref="profile"><i class="fa fa-home"
-                                                                                                    aria-hidden="true"></i><span
-                                    class="hidden-xs hidden-sm">Home</span></a></li>
-                    <li ng-class="{active:isSelected(2)}"><a ng-click="select(2)" ui-sref="createSensorHub"><i
-                                    class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Create Sensor Cluster</span></a>
-                    </li>
-                    <li ng-class="{active:isSelected(6)}"><a ng-click="select(6)" ui-sref="sensorManagement"><i class="fa fa-cogs"
-                                                                                                                aria-hidden="true"></i><span
-                                    class="hidden-xs hidden-sm">Management</span></a></li>
-                    <li ng-class="{active:isSelected(3)}"><a ng-click="select(3)" ui-sref="monitor"><i class="fa fa-bar-chart"
-                                                                                              aria-hidden="true"></i><span
-                                    class="hidden-xs hidden-sm">Monitor</span></a></li>
-                    <li ng-class="{active:isSelected(4)}"><a ng-click="select(4)" href="#"><i class="fa fa-user"
-                                                                                              aria-hidden="true"></i><span
-                                    class="hidden-xs hidden-sm">Billing</span></a></li>
-                    <li ng-class="{active:isSelected(5)}"><a ng-click="select(5)" ui-sref="autoscaling"><i class="fa fa-calendar"
-                                                                                              aria-hidden="true"></i><span
-                                    class="hidden-xs hidden-sm">Auto Scaling</span></a></li>
-
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-10 col-sm-11 display-table-cell v-align" ng-controller="managementController">
+        <div class="col-md-10 col-sm-11 display-table-cell v-align" >
             <div class="row">
                 <header>
                     <div class="col-md-7">

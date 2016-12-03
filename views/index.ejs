@@ -45,43 +45,43 @@
     <!-- Custom Theme Style -->
     <link href="/vendors/css/custom.min.css" rel="stylesheet">
 
-    <!-- jQuery -->
+<!--    &lt;!&ndash; jQuery &ndash;&gt;
     <script src="/vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
+    &lt;!&ndash; Bootstrap &ndash;&gt;
     <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
+    &lt;!&ndash; FastClick &ndash;&gt;
     <script src="/vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
+    &lt;!&ndash; NProgress &ndash;&gt;
     <script src="/vendors/nprogress/nprogress.js"></script>
-    <!-- Chart.js -->
+    &lt;!&ndash; Chart.js &ndash;&gt;
     <script src="/vendors/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
+    &lt;!&ndash; gauge.js &ndash;&gt;
     <script src="/vendors/bernii/gauge.js/dist/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
+    &lt;!&ndash; bootstrap-progressbar &ndash;&gt;
     <script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
+    &lt;!&ndash; iCheck &ndash;&gt;
     <script src="/vendors/iCheck/icheck.min.js"></script>
-    <!-- Skycons -->
+    &lt;!&ndash; Skycons &ndash;&gt;
     <script src="/vendors/skycons/skycons.js"></script>
-    <!-- Flot -->
+    &lt;!&ndash; Flot &ndash;&gt;
     <script src="/vendors/Flot/jquery.flot.js"></script>
     <script src="/vendors/Flot/jquery.flot.pie.js"></script>
     <script src="/vendors/Flot/jquery.flot.time.js"></script>
     <script src="/vendors/Flot/jquery.flot.stack.js"></script>
     <script src="/vendors/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
+    &lt;!&ndash; Flot plugins &ndash;&gt;
     <script src="/js/flot/jquery.flot.orderBars.js"></script>
     <script src="/js/flot/date.js"></script>
     <script src="/js/flot/jquery.flot.spline.js"></script>
     <script src="/js/flot/curvedLines.js"></script>
-    <!-- jVectorMap -->
+    &lt;!&ndash; jVectorMap &ndash;&gt;
     <script src="/js/maps/jquery-jvectormap-2.0.3.min.js"></script>
-    <!-- bootstrap-daterangepicker -->
+    &lt;!&ndash; bootstrap-daterangepicker &ndash;&gt;
     <script src="/js/moment/moment.min.js"></script>
     <script src="/js/datepicker/daterangepicker.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="/js/custom.min.js"></script>
+    <!--<script src="/js/custom.min.js"></script> -->
 
 
     <script src="/javascripts/Angular.js"></script>
@@ -91,7 +91,6 @@
     <script src="/javascripts/profilecontroller.js"></script>
     <script src="/javascripts/createsensorcontroller.js"></script>
     <script src="/javascripts/createsensorhubcontroller.js"></script>
-    <script src="/javascripts/homecontroller.js"></script>
     <script src="/javascripts/navBarController.js"></script>
     <script src="/javascripts/managementController.js"></script>
     <script src="/javascripts/autoscalingcontroller.js"></script>
@@ -103,8 +102,16 @@
   </head>
   <body class="nav-md">
 
-    <div ui-view="main"></div>
+  <div class="container body">
+    <div class="main_container">
+      <div class="col-md-3 left_col">
+          <div ui-view="sidemenu"></div>
+      </div>
+          <div ui-view = "navbar"></div>
+          <div ui-view="main"></div>
 
+    </div>
+  </div>
 
 
   <!-- Flot -->

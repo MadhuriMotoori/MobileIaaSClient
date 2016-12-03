@@ -1,180 +1,200 @@
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
-      integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<body class="home">
-<div class="container-fluid display-table">
-    <div class="row display-table-row" ng-controller="navBarController">
-        <div class="col-md-3 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
-            <div class="logo">
-                <a hef="home.html"><img src="./images/LogoBlue.png" alt="merkery_logo" class="hidden-xs hidden-sm">
-
-                </a>
-            </div>
-            <div class="navi">
-                <ul>
-                    <li ng-class="{active:isSelected(1)}"><a ng-click="select(1)" ui-sref="profile"><i class="fa fa-home"
-                                                                                                    aria-hidden="true"></i><span
-                                    class="hidden-xs hidden-sm">Home</span></a></li>
-                    <li ng-class="{active:isSelected(2)}"><a ng-click="select(2)" ui-sref="createSensorHub"><i
-                                    class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Create Sensor Cluster</span></a>
-                    </li>
-                    <li ng-class="{active:isSelected(6)}"><a ng-click="select(6)" ui-sref="sensorManagement"><i class="fa fa-cogs"
-                                                                                              aria-hidden="true"></i><span
-                                    class="hidden-xs hidden-sm">Management</span></a></li>
-                    <li ng-class="{active:isSelected(3)}"><a ng-click="select(3)" ui-sref="monitor"><i class="fa fa-bar-chart"
-                                                                                              aria-hidden="true"></i><span
-                                    class="hidden-xs hidden-sm">Monitor</span></a></li>
-                    <li ng-class="{active:isSelected(4)}"><a ng-click="select(4)" href="#"><i class="fa fa-user"
-                                                                                              aria-hidden="true"></i><span
-                                    class="hidden-xs hidden-sm">Billing</span></a></li>
-                    <li ng-class="{active:isSelected(5)}"><a ng-click="select(5)" ui-sref="autoscaling"><i class="fa fa-calendar"
-                                                                                              aria-hidden="true"></i><span
-                                    class="hidden-xs hidden-sm">Auto Scaling</span></a></li>
-
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-10 col-sm-11 display-table-cell v-align">
-            <!--<button type="button" class="slide-toggle">Slide Toggle</button> -->
-            <div class="row">
-                <header>
-                    <div class="col-md-7">
-                        <nav class="navbar-default pull-left">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas"
-                                        data-target="#side-menu" aria-expanded="false">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </div>
-                        </nav>
-                        <div>
-                            <img src="./images/Background.png" alt="user" width="175" height="120" align ="middle">
-                            <img src="./images/InfraSense.png" alt="user" width="300" height="120" align ="middle">
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="header-rightside">
-                            <ul class="list-inline header-top pull-right">
-
-                                <li class="dropdown">
-                                    <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown"><img src="./images/User.png" alt="user">
-                                        <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <div class="navbar-content">
-                                                <a ui-sref="#" class="view btn-sm active">Log Out</a>
-                                            </div>
-                                        </li>
-                                    </ul>
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Add Sensors to Sensor Hub</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                </header>
-            </div>
-            <div class="user-dashboard">
-                <div class="well" ng-controller="createsensorhubcontroller">
-                    <form class="form-horizontal">
-                        <fieldset>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br />
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">Enter Sensor Hub Name</label>
-                                <div class="col-md-4">
-                                    <input id="sensorhubname" name="sensorhubname" ng-model="sensorhubname" type="text"
-                                           placeholder="Sensor Hub Name" class="form-control input-md" required>
-                                </div>
-                            </div>
-
-                            <label class="col-md-4 control-label" for="sensorType">Sensor Type</label>
-                            <div class="col-md-4">
-                                <select id="sensorType" name="sensorType" class="form-control" ng-model="sensorType">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sensorType">Sensor Type <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="sensorType" name="sensorType" class="form-control col-md-7 col-xs-12" ng-model="sensorType">
                                     <option value="Temperature Sensor">Temperature Sensor</option>
                                     <option value="Pressure Sensor">Pressure Sensor</option>
                                     <option value="Salinity Sensor">Salinity Sensor</option>
                                     <option value="Oxygen Sensor">Oxygen Sensor</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <button id="addsensor" name="addsensor" ng-click="addSensor()"
-                                            class="btn btn-primary">Add Sensor
-                                    </button>
-                                </div>
+                        </div>
+<!--                        <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Region</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
                             </div>
-
-                           <div ng-hide="hideCart">
-
-                                <table class="table-fill" align="center" height = "10px">
-                                    <thead>
-                                    <tr>
-                                        <th class="text-left">Sensor Type</th>
-                                        <th class="text-left">Total</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="table-hover">
-                                    <tr ng-repeat="sensor in sensorList">
-                                        <td class="text-left">{{sensor.type}}</td>
-                                        <td class="text-left">{{sensor.count}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                           </div>
-                            <br/><br/>
-
-                                    <button id="addsensorhub" name="addsensorhub" ng-click="addSensorHub()"
-                                            class="myButton" style="display: block; margin: 0 auto;" >Create Sensor Hub
-                                    </button>
-
-                            <div ng-hide="resultsDetails" style="padding-top: 30px; text-align: center">
-
-                                <h3 style="color: #337AFF">The following sensors are created successfully</h3>
-                                    <ul ng-repeat="sensor in sensors">
-                                        <li>
-
-                                            <h4 style="color: #337AFF">Sensor Type: {{sensor.SensorId}} , Sensor Id: {{sensor.SensorType}}</h4>
-                                        </li>
-                                    </ul>
+                        </div>-->
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="submit" class="btn btn-success" id="addsensor" name="addsensor" ng-click="addSensor()">Add Sensor</button>
                             </div>
+                        </div>
 
-
-            </fieldset>
-            </form>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-</div>
-</div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Sensor Types Info</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
 
-<!-- Modal -->
-<div id="add_project" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Sensor Type</th>
+                            <th>Region</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="sensor in sensorList">
+                            <th scope="row">{{sensor.id}}</th>
+                            <td>{{sensor.type}}</td>
+                            <td>{{sensor.region}}</td>
+                            <td >{{sensor.count}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header login-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Add Project</h4>
-            </div>
-            <div class="modal-body">
-                <input type="text" placeholder="Project Title" name="name">
-                <input type="text" placeholder="Post of Post" name="mail">
-                <input type="text" placeholder="Author" name="passsword">
-                <textarea placeholder="Desicrption"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="cancel" data-dismiss="modal">Close</button>
-                <button type="button" class="add-project" data-dismiss="modal">Save</button>
+                </div>
             </div>
         </div>
 
+        <div class="col-md-12 col-sm-12 col-xs-12" >
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Create Sensor Hub</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br />
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sensorhubname">Sensor Hub Name <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="sensorhubname" name="sensorhubname" ng-model="sensorhubname" type="text"
+                                       placeholder="Sensor Hub Name" class="form-control col-md-7 col-xs-12" required="required">
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="submit" class="btn btn-success" id="addsensorhub" name="addsensorhub" ng-click="addSensorHub()">Create Sensor Hub</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+         </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12" ng-hide="resultsDetails">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Created Sensor Details</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                            <tr class="headings">
+                                <th class="column-title"># </th>
+                                <th class="column-title">Sensor Cluster</th>
+                                <th class="column-title">Sensor Type </th>
+                                <th class="column-title">Sensor Id </th>
+
+                                <th class="bulk-actions" colspan="7">
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr class="odd pointer" ng-repeat="sensor in sensors">
+                                <td class=" ">{{sensor.index}}</td>
+                                <td class=" ">{{sensor.sensorhubname}}</td>
+                                <td class=" ">{{sensor.SensorType}}</td>
+                                <td class=" ">{{sensor.SensorId}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-
-</body>

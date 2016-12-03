@@ -39,11 +39,13 @@
             .state('profile', {
                 url: "/profile",
                 views:{
-                    'header': {
-                        templateUrl: 'header.ejs',
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
                     },
-                    'footer': {
-                        templateUrl: 'footer.ejs',
+                    'sidemenu@':{
+                        templateUrl: 'sidebarView.ejs',
+                        controller: 'navBarController'
                     },
                     'main@':{
                         templateUrl: 'profile.ejs',
@@ -55,12 +57,6 @@
             .state('adminprofile', {
                 url: "/adminprofile",
                 views:{
-                    'header': {
-                        templateUrl: 'header.ejs',
-                    },
-                    'footer': {
-                        templateUrl: 'footer.ejs',
-                    },
                     'main@':{
                         templateUrl: 'profile.ejs',
                         controller : 'profilecontroller'
@@ -71,11 +67,13 @@
             .state('createSensorHub', {
                 url: "/createsensorhub",
                 views:{
-                    'header': {
-                        templateUrl: 'header.ejs',
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
                     },
-                    'footer': {
-                        templateUrl: 'footer.ejs',
+                    'sidemenu@':{
+                        templateUrl: 'sidebarView.ejs',
+                        controller: 'navBarController'
                     },
                     'main@':{
                         templateUrl: 'createSensorHubForm.ejs',
@@ -87,11 +85,9 @@
             .state('createSensor', {
                 url: "/createsensor",
                 views:{
-                    'header': {
-                        templateUrl: 'header.ejs',
-                    },
-                    'footer': {
-                        templateUrl: 'footer.ejs',
+                    'sidemenu@':{
+                        templateUrl: 'sidebarView.ejs',
+                        controller: 'navBarController'
                     },
                     'main@':{
                         templateUrl: 'createSensorForm.ejs',
@@ -103,11 +99,13 @@
             .state('sensorManagement', {
                 url: "/sensorManagement",
                 views:{
-                    'header': {
-                        templateUrl: 'header.ejs',
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
                     },
-                    'footer': {
-                        templateUrl: 'footer.ejs',
+                    'sidemenu@':{
+                        templateUrl: 'sidebarView.ejs',
+                        controller: 'navBarController'
                     },
                     'main@':{
                         templateUrl: 'management.ejs',
@@ -116,30 +114,12 @@
                 },
                 params: { test: "default value" }
             })
-            .state('home', {
-                url: "/home",
-                views:{
-                    'header': {
-                        templateUrl: 'header.ejs',
-                    },
-                    'footer': {
-                        templateUrl: 'footer.ejs',
-                    },
-                    'main@':{
-                        templateUrl: 'home.ejs',
-                        controller : 'homecontroller'
-                    }
-                },
-                params: { test: "default value" }
-            })
             .state('monitor', {
                 url: "/monitor",
                 views:{
-                    'header': {
-                        templateUrl: 'header.ejs',
-                    },
-                    'footer': {
-                        templateUrl: 'footer.ejs',
+                    'sidemenu@':{
+                        templateUrl: 'sidebarView.ejs',
+                        controller: 'navBarController'
                     },
                     'main@':{
                         templateUrl: 'monitor.ejs',
@@ -151,11 +131,9 @@
             .state('autoscaling', {
                 url: "/autoscaling",
                 views:{
-                    'header': {
-                        templateUrl: 'header.ejs',
-                    },
-                    'footer': {
-                        templateUrl: 'footer.ejs',
+                    'sidemenu@':{
+                        templateUrl: 'sidebarView.ejs',
+                        controller: 'navBarController'
                     },
                     'main@':{
                         templateUrl: 'autoscaling.ejs',

@@ -5,10 +5,12 @@
 	  $scope.imageId = "ami-5ee7443e";
 	  $scope.hideCart = true;
 	  $scope.sensorType='Temperature Sensor';
-	  var addsensors= [{type: 'Temperature Sensor', count: 0},{type: 'Pressure Sensor', count: 0},{type: 'Salinity Sensor', count: 0},{type: 'Oxygen Sensor', count: 0} ];
+	  var addsensors= [{id: 1 , type: 'Temperature Sensor', region: 'NewYork' , count: 0},{id: 2 , type: 'Pressure Sensor', region:'SanJose', count: 0},
+          {id:3, type: 'Salinity Sensor', region: 'SantaClara' ,count: 0},{id: 4, type: 'Oxygen Sensor', region:'Seattle' , count: 0} ];
 	  $scope.sensorhubname = "";
       $scope.resultsDetails = true;
-
+      $scope.username = $cookies.get('username');
+      $scope.sensorList = addsensors;
       $scope.addSensor = function(){
       	$scope.hideCart = false;
           for (var i = 0; i < addsensors.length; i++) {
@@ -39,7 +41,6 @@
                   console.log(result.instanceDetails);
                   $scope.sensors = result.instanceDetails;
                   $scope.resultsDetails = false;
-
               })
               .error(function(error){
                   console.log('error')

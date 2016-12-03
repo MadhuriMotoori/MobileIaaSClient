@@ -1,7 +1,7 @@
-app.controller('navBarController', [ '$scope', '$localStorage', '$window','$http',
-    function($scope, $localStorage, $window, $http) {
+app.controller('navBarController', [ '$scope', '$localStorage', '$window','$http','$cookies',
+    function($scope, $localStorage, $window, $http, $cookies) {
 
-
+        $scope.username = $cookies.get('username');
         $(window).unload(function(){
             localStorage.removeItem(tab);
         });
