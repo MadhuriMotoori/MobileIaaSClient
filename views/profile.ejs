@@ -1,0 +1,129 @@
+
+<div class="container-fluid display-table">
+    <div class="row display-table-row" ng-controller="navBarController">
+        <div class="col-md-3 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
+            <div class="logo">
+                <a hef="home.html"><img src="./images/LogoBlue.png" alt="merkery_logo" class="hidden-xs hidden-sm">
+
+                </a>
+            </div>
+            <div class="navi">
+                <ul>
+                    <li ng-class="{active:isSelected(1)}"><a ng-click="select(1)" ui-sref="profile"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
+                    <li ng-class="{active:isSelected(2)}"><a ng-click="select(2)" ui-sref="createSensorHub"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Create Sensor Cluster</span></a></li>
+                    <li ng-class="{active:isSelected(6)}"><a ng-click="select(6)" ui-sref="sensorManagement"><i class="fa fa-cogs"
+                                                                                                                aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Management</span></a></li>
+                    <li ng-class="{active:isSelected(3)}"><a ng-click="select(3)" ui-sref="monitor"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Monitor</span></a></li>
+                    <li ng-class="{active:isSelected(4)}"><a ng-click="select(4)"  href="#"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Billing</span></a></li>
+                    <li ng-class="{active:isSelected(5)}"><a ng-click="select(5)" ui-sref="autoscaling"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Auto Scaling</span></a></li>
+
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 col-sm-11 display-table-cell v-align">
+            <!--<button type="button" class="slide-toggle">Slide Toggle</button> -->
+            <div class="row">
+                <header>
+                    <div class="col-md-7">
+                        <nav class="navbar-default pull-left">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                        </nav>
+                        <div>
+                            <img src="./images/Background.png" alt="user" width="175" height="120" align ="middle">
+                            <img src="./images/InfraSense.png" alt="user" width="300" height="120" align ="middle">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="header-rightside">
+                            <ul class="list-inline header-top pull-right">
+                                <li class="dropdown">
+                                    <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown"><img src="./images/User.png" alt="user">
+                                        <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="navbar-content">
+                                                <a ui-sref="#" class="view btn-sm active">Log Out</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            <div class="user-dashboard">
+                <h1>Welcome User Name</h1>
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-8 gutter">
+                        <div class="thumbnail">
+                            <img src="./images/LogoBlue.png" alt="Bootstrap Thumbnail: Beautiful Bootstrap Thumbnail like Material Design Cards">
+                            <div class="caption">
+                                <h3>CPU Usage</h3>
+                                <p class="card-description"> You can see you CPU Usage here</p>
+                                <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-3 col-xs-8 gutter">
+                        <div class="thumbnail">
+                            <img src="./images/LogoBlue.png" alt="Bootstrap Thumbnail: Beautiful Bootstrap Thumbnail like Material Design Cards">
+                            <div class="caption">
+                                <h3>Sensors Usage</h3>
+                                <p class="card-description"> You can see you Sensor Usage here</p>
+                                <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-3 col-xs-8 gutter">
+                        <div class="thumbnail">
+                            <img src="./images/LogoBlue.png" alt="Bootstrap Thumbnail: Beautiful Bootstrap Thumbnail like Material Design Cards">
+                            <div class="caption">
+                                <h3>Memory Usage</h3>
+                                <p class="card-description"> You can see you Memory Usage here</p>
+                                <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
+
+
+<div class="container" style="height: 450px; width: 1350px;">
+<div class="row row-content">
+	<div class="col-sm-3">
+			<div class="well">Text
+	</div>
+	</div>
+	<div class="col-sm-5">
+
+
+	<div class="well">Sensor Form
+	</div>
+	</div>
+	<div class="col-sm-4">
+			<div class="well">Cart
+			</div></div>
+			
+</div>
+</div>
+	
+-->
+
+

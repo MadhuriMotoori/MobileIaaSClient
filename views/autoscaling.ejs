@@ -1,0 +1,206 @@
+
+<div class="container-fluid display-table">
+    <div class="row display-table-row" ng-controller="navBarController">
+        <div class="col-md-3 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
+            <div class="logo">
+                <a hef="home.html"><img src="./images/LogoBlue.png" alt="merkery_logo" class="hidden-xs hidden-sm">
+
+                </a>
+            </div>
+            <div class="navi">
+                <ul>
+                    <li ng-class="{active:isSelected(1)}"><a ng-click="select(1)" ui-sref="profile"><i class="fa fa-home"
+                                                                                                       aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Home</span></a></li>
+                    <li ng-class="{active:isSelected(2)}"><a ng-click="select(2)" ui-sref="createSensorHub"><i
+                                    class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Create Sensor Cluster</span></a>
+                    </li>
+                    <li ng-class="{active:isSelected(6)}"><a ng-click="select(6)" ui-sref="sensorManagement"><i class="fa fa-cogs"
+                                                                                                                aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Management</span></a></li>
+                    <li ng-class="{active:isSelected(3)}"><a ng-click="select(3)" ui-sref="monitor"><i class="fa fa-bar-chart"
+                                                                                                       aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Monitor</span></a></li>
+                    <li ng-class="{active:isSelected(4)}"><a ng-click="select(4)" href="#"><i class="fa fa-user"
+                                                                                              aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Billing</span></a></li>
+                    <li ng-class="{active:isSelected(5)}"><a ng-click="select(5)" ui-sref="autoscaling"><i class="fa fa-calendar"
+                                                                                              aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Auto Scaling</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 col-sm-11 display-table-cell v-align">
+            <!--<button type="button" class="slide-toggle">Slide Toggle</button> -->
+            <div class="row">
+                <header>
+                    <div class="col-md-7">
+                        <nav class="navbar-default pull-left">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas"
+                                        data-target="#side-menu" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                        </nav>
+                        <div>
+                            <img src="./images/Background.png" alt="user" width="175" height="120" align ="middle">
+                            <img src="./images/InfraSense.png" alt="user" width="300" height="120" align ="middle">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="header-rightside">
+                            <ul class="list-inline header-top pull-right">
+
+                                <li class="dropdown">
+                                    <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown"><img src="./images/User.png" alt="user">
+                                        <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="navbar-content">
+                                                <a ui-sref="#" class="view btn-sm active">Log Out</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            <div class="user-dashboard">
+                <div class="well" ng-controller="managementController">
+                    <form class="form-horizontal">
+                        <fieldset>
+
+                            <button id="chooseSensorHub" name="chooseSensorHub" ng-click="chooseSensorHub()"
+                                    class = "myButton1" style="display: block; margin: 0 auto;">Select to List Sensor Hub Names
+                            </button>
+                            <br/> <br/>
+                            <!-- Text input-->
+                            <div ng-hide = "hideSensorHubName">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textinput">Select Sensor Hub Name</label>
+                                    <div class="col-md-4">
+                                        <select id="hubname" name="hubname" class="form-control" ng-model="hubname" ng-options="name.SensorHubName as name.SensorHubName for name in hubnamelist">
+                                        </select>
+                                    </div>
+                                </div>
+                                <button id="listsensortypes" name="listsensortypes" ng-click="listSensor()"
+                                        class = "myButton1" style="display: block; margin: 0 auto; padding: 5px 72px;">Select
+                                </button>
+                                <br/><br/>
+                            </div>
+                            <div ng-hide = "hideSensorList">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="sensorType">Sensor Type</label>
+                                    <div class="col-md-4">
+                                        <select id="sensorType" name="sensorType" class="form-control" ng-model="sensortypename" ng-options="list.SensorType as list.SensorType for list in sensorlist">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button id="SensorInstance" name="SensorInstance" ng-click="getSensorInstances()"
+                                        class = "myButton1"  style="display: block; margin: 0 auto; padding: 5px 72px;">
+                                    Get Sensor Instances
+                                </button>
+                            </div>
+
+                            <div ng-hide = "hideSensorInstancesList">
+
+
+
+                                <div ng-repeat="sensor in sensorInstanceslist" style="padding-top: 30px;" >
+                                    <div class="col-md-12" style="padding-top: 10px;">
+
+                                        <label class="col-md-3 control-label" for="sensorType"><h4 style="color: #337AFF">Sensor Id: {{sensor.SensorId}}</h4></label>
+                                        <div class="col-md-3">
+                                            <button id="startSensor" name="startSensor" ng-click="startSensor(sensor.SensorId)"
+                                                    class = "myButton1"  style="display: block; margin: 0 auto; padding: 5px 72px;">
+                                                Start Sensor
+                                            </button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button id="stopSensor" name="stopSensor" ng-click="stopSensor(sensor.SensorId)"
+                                                    class = "myButton1"  style="display: block; margin: 0 auto; padding: 5px 72px;">
+                                                Stop Sensor
+                                            </button>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <button id="stopSensor" name="terminateSensor" ng-click="terminateSensor(sensor.SensorId)"
+                                                    class = "myButton1"  style="display: block; margin: 0 auto; padding: 5px 72px;">
+                                                Terminate
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div ng-hide="resultsStartDetails" style="padding-top: 100px; text-align: center">
+
+                                    <h3 style="color: #ff464f">The following sensor is started successfully</h3>
+
+                                    <h4>Sensor Id: {{StartedSensorId}}</h4>
+
+                                </div>
+                                <div ng-hide="resultsStopDetails" style="padding-top: 100px; text-align: center">
+
+                                    <h3 style="color: #ff464f">The following sensor is stopped successfully</h3>
+                                    <li>
+                                        <h4>Sensor Id: {{StoppedSensorId}}</h4>
+                                    </li>
+
+                                </div>
+                                <div ng-hide="resultsTerminateDetails" style="padding-top: 100px; text-align: center">
+
+                                    <h3 style="color: #ff464f">The following sensor is terminated successfully</h3>
+                                    <li>
+                                        <h4>Sensor Id: {{TerminatedSensorId}}</h4>
+                                    </li>
+
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="add_project" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header login-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Add Project</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="Project Title" name="name">
+                <input type="text" placeholder="Post of Post" name="mail">
+                <input type="text" placeholder="Author" name="passsword">
+                <textarea placeholder="Desicrption"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="cancel" data-dismiss="modal">Close</button>
+                <button type="button" class="add-project" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+

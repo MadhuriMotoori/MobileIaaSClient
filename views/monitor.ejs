@@ -1,0 +1,272 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+      integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+
+<body class="home">
+<div class="container-fluid display-table">
+    <div class="row display-table-row" ng-controller="navBarController">
+        <div class="col-md-3 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
+            <div class="logo">
+                <a hef="home.html"><img src="./images/LogoBlue.png" alt="merkery_logo" class="hidden-xs hidden-sm">
+
+                </a>
+            </div>
+            <div class="navi">
+                <ul>
+                    <li ng-class="{active:isSelected(1)}"><a ng-click="select(1)" ui-sref="profile"><i class="fa fa-home"
+                                                                                                    aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Home</span></a></li>
+                    <li ng-class="{active:isSelected(2)}"><a ng-click="select(2)" ui-sref="createSensorHub"><i
+                                    class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Create Sensor Cluster</span></a>
+                    </li>
+                    <li ng-class="{active:isSelected(6)}"><a ng-click="select(6)" ui-sref="sensorManagement"><i class="fa fa-cogs"
+                                                                                                                aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Management</span></a></li>
+                    <li ng-class="{active:isSelected(3)}"><a ng-click="select(3)" ui-sref="monitor"><i class="fa fa-bar-chart"
+                                                                                              aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Monitor</span></a></li>
+                    <li ng-class="{active:isSelected(4)}"><a ng-click="select(4)" href="#"><i class="fa fa-user"
+                                                                                              aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Billing</span></a></li>
+                    <li ng-class="{active:isSelected(5)}"><a ng-click="select(5)" ui-sref="autoscaling"><i class="fa fa-calendar"
+                                                                                              aria-hidden="true"></i><span
+                                    class="hidden-xs hidden-sm">Auto Scaling</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 col-sm-11 display-table-cell v-align" ng-controller="managementController">
+            <div class="row">
+                <header>
+                    <div class="col-md-7">
+                        <nav class="navbar-default pull-left">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas"
+                                        data-target="#side-menu" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                        </nav>
+                        <div>
+                            <img src="./images/Background.png" alt="user" width="175" height="120" align ="middle">
+                            <img src="./images/InfraSense.png" alt="user" width="300" height="120" align ="middle">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="header-rightside">
+                            <ul class="list-inline header-top pull-right">
+                                <li class="dropdown">
+                                    <a ui-sref="profile" class="dropdown-toggle" data-toggle="dropdown"><img src="./images/User.png" alt="user">
+                                        <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="navbar-content">
+                                                <a ui-sref="login" class="view btn-sm active">LogOut</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            <br/><br/>
+            <div class="user-dashboard" ng-controller="managementController">
+
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div ng-hide = "hideMonitorForm">
+                            <button id="chooseSensorHub" name="chooseSensorHub" ng-click="chooseSensorHub()"
+                                    class = "myButton1" style="display: block; margin: 0 auto;">Select to List Sensor Hub Names
+                            </button>
+                            <br/> <br/>
+                            <!-- Text input-->
+                            <div ng-hide = "hideSensorHubName">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="textinput">Select Sensor Hub Name</label>
+                                    <div class="col-md-4">
+                                        <select id="hubname" name="hubname" class="form-control" ng-init="hubname = hubnamelist[0].SensorHubName"  ng-model="hubname" ng-options="name.SensorHubName as name.SensorHubName for name in hubnamelist">
+                                        </select>
+                                    </div>
+                                </div>
+                                <button id="listsensortypes" name="listsensortypes" ng-click="listSensor()"
+                                        class = "myButton1" style="display: block; margin: 0 auto; padding: 5px 72px;">Select
+                                </button>
+                                <br/><br/>
+                            </div>
+                            <div ng-hide = "hideSensorList">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="sensorType">Sensor Type</label>
+                                    <div class="col-md-4">
+                                        <select id="sensorType" name="sensorType" class="form-control" ng-model="sensortypename" ng-options="list.SensorType as list.SensorType for list in sensorlist">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button id="SensorInstance" name="SensorInstance" ng-click="getSensorInstances()"
+                                        class = "myButton1"  style="display: block; margin: 0 auto; padding: 5px 72px;">
+                                    Get Sensor Instances
+                                </button>
+                            </div>
+
+                            <div ng-hide = "hideDate">
+                                <br/><br/>
+                                <div class="col-md-12" style="padding-top: 10px;">
+                                    <div class="col-md-4">
+                                    <label class="col-md-4 control-label"><h4>Start Date</h4></label>
+                                    <input type="date" ng-model="startDate"  ></p>
+                                    </div>
+                                    <div class="col-md-8">
+                                    <label class="col-md-8 control-label"><h4>End Date</h4></label>
+                                    <input type="date" ng-model="endDate"></p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div ng-hide = "hideSensorInstancesList">
+
+                                <div ng-repeat="sensor in sensorInstanceslist" style="padding-top: 30px;" >
+                                    <div class="col-md-12" style="padding-top: 10px;">
+                                        <label class="col-md-4 control-label" for="sensorType"><h4 style="color: #337AFF">Sensor Id: {{sensor.SensorId}}</h4></label>
+                                        <div class="col-md-3">
+                                            <button id="monitorSensor" name="monitorSensor" ng-click="monitorSensor(sensor.SensorId)"
+                                                    class = "myButton1"  style="display: block; margin: 0 auto; padding: 5px 72px;">
+                                                Monitor Sensor
+                                            </button>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            </div>
+                            <div ng-hide = "hideMonitoringDetails">
+
+                                <div align = "center">
+                                    <h3 style="color: #6495ED;font-weight: bold;font-family: Verdana;"> Sensor ID   {{sensorid}}</h3><br/>
+                                    <h2 style="color: #6495ED;font-weight: bold;font-family: Verdana;"> Status {{status.Name}} </h2>
+                                </div>
+                                <section id="plans">
+                                    <div class="container">
+                                        <div class="row">
+
+                                            <!-- item -->
+                                            <div class="col-md-4 text-center">
+                                                <div class="panel panel-pricing customizemine">
+                                                    <div class="panel-heading">
+                                                        <i class="fa"><img src = "./images/Metrics.png" width="50" height="50"></i>
+                                                        <h3>Sensor Utilization</h3>
+                                                    </div>
+                                                    <div class="panel-body text-center customizemine1">
+                                                        <p><div style="height:300px;width:300px;">
+                                                            <canvas id="pie" class="chart chart-pie"
+                                                                    chart-data="data" chart-labels="labels" chart-options="options" chart-colors="colours">
+                                                            </canvas>
+                                                        </div></p>
+                                                    </div>
+
+                                                    <div class="panel-footer">
+                                                       <b> {{cpuUtilizationAvg | number:4}}</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /item -->
+
+                                            <!-- item -->
+                                            <div class="col-md-4 text-center">
+                                                <div class="panel panel-pricing customizemine">
+                                                    <div class="panel-heading">
+                                                        <i class="fa"><img src = "./images/Metrics.png" width="50" height="50"></i>
+                                                        <h3>Incoming Traffic</h3>
+                                                    </div>
+                                                    <div class="panel-body text-center">
+                                                        <p><div style="height:300px;width:300px;">
+                                                            <canvas id="pie" class="chart chart-pie"
+                                                                    chart-data="dataNetIn" chart-labels="labelsNetIn" chart-options="options" chart-colors="colours">
+                                                            </canvas>
+                                                        </div></p>
+                                                    </div>
+
+                                                    <div class="panel-footer">
+                                                       <b> {{networkInMet | number:4}}</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /item -->
+
+                                            <!-- item -->
+                                            <div class="col-md-4 text-center">
+                                                <div class="panel panel-pricing customizemine">
+                                                    <div class="panel-heading">
+                                                        <i class="fa"><img src = "./images/Metrics.png" width="50" height="50"></i>
+                                                        <h3>Outgoing Traffic</h3>
+                                                    </div>
+                                                    <div class="panel-body text-center">
+                                                        <p><div style="height:300px;width:300px;">
+                                                            <canvas id="pie" class="chart chart-pie"
+                                                                    chart-data="dataNetOut" chart-labels="labelsNetOut" chart-options="options" chart-colors="colours">
+                                                            </canvas>
+                                                        </div></p>
+                                                    </div>
+
+                                                    <div class="panel-footer">
+                                                       <b> {{networkOutMet | number:4}}</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /item -->
+
+                                            <button id="backtomonitor" name="backtomonitor" ng-click="reloadMonitor()" class = "myButton1"  style="display: block; margin: 0 auto; padding: 5px 72px;">
+                                                Back
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </section>
+
+
+
+                            </div>
+
+                        </fieldset>
+                    </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="add_project" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header login-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Add Project</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="Project Title" name="name">
+                <input type="text" placeholder="Post of Post" name="mail">
+                <input type="text" placeholder="Author" name="passsword">
+                <textarea placeholder="Desicrption"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="cancel" data-dismiss="modal">Close</button>
+                <button type="button" class="add-project" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</body>
