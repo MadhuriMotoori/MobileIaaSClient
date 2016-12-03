@@ -1,19 +1,22 @@
 "use strict"
 app.controller('managementController',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies) {
-    $scope.imageId = "ami-c074d7a0";
-
+    //$scope.imageId = "ami-c074d7a0";
+    $scope.imageId = "ami-5ee7443e";
 /*    $scope.hideSensorList = true;
     $scope.hideSensorHubName = true;
-    $scope.hideMonitoringDetails = true;
+
     $scope.hideDate = true;
     $scope.hideMonitoringDetails = true;
     $scope.hideMonitorForm = false;
     $scope.resultsStartDetails = true;
     $scope.resultsStopDetails = true;
     $scope.resultsTerminateDetails = true;*/
-
-    $scope.imageId = "ami-5ee7443e";
     $scope.hideSensorManager = true;
+    $scope.hideMonitoringDetails = true;
+    $scope.hideGraph = true;
+    $scope.hideErrormessage = true;
+    $scope.hideGraphDetails = true;
+
     $scope.getUserSensorDetails = function () {
         $http({
             method : "POST",
@@ -272,56 +275,82 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
             })
     };
 
-    $scope.monitorSensor = function(sensorId){
-          $http.post(
-         'http://localhost:5000/api/v1/getMonitoringInfo',
-         {
-             sensorid: sensorId,
-             startDate : $scope.startDate,
-             endDate : $scope.endDate
-         },
-         { cors: true }
-         )
-         .success(function(data){
-             $scope.hideMonitoringDetails = false;
-             $scope.hideMonitorForm = true;
-
-             var result = JSON.parse(JSON.stringify(data));
-             console.log(result.cpuCreditUsageMet.Datapoints[0].Average);
-             $scope.sensorid = result.sensorid;
-             $scope.status = result.state;
-             $scope.cpuUtilizationAvg = result.cpuUtilizationMet.Datapoints[0].Average;
-             $scope.cpuCreditUsageMet = result.cpuCreditUsageMet.Datapoints[0].Average;
-             $scope.networkPacketsInMet =  result.networkPacketsInMet.Datapoints[0].Average;
-             $scope.networkPacketsOutMet =  result.networkPacketsOutMet.Datapoints[0].Average;
-             $scope.networkInMet =  result.networkInMet.Datapoints[0].Average;
-             $scope.networkOutMet =  result.networkOutMet.Datapoints[0].Average;
-
-             $scope.labels = ["Utilized", "Empty"];
-             $scope.data = [100*result.cpuUtilizationMet.Datapoints[0].Average, 100-(100*result.cpuUtilizationMet.Datapoints[0].Average)];
-
-
-
-             $scope.labelsNetIn = ["Utilized", "Empty"];
-             $scope.dataNetIn = [result.networkInMet.Datapoints[0].Average/9000, 100-(result.networkInMet.Datapoints[0].Average/9000)];
-
-
-
-             $scope.labelsNetOut = ["Utilized", "Empty"];
-             $scope.dataNetOut = [result.networkOutMet.Datapoints[0].Average/200, 100-(result.networkOutMet.Datapoints[0].Average/200)];
-
-             $scope.colours = ["#ff1919",
-                 "#808080"];
-             
-         })
-         .error(function(error){
-         console.log('error')
-         })
+    $scope.monitorSensor = function (sensorInfo) {
+        $scope.selectedSensor = sensorInfo;
+        $scope.hideMonitoringDetails = true;
+        $scope.hideErrormessage = true;
+        $scope.hideGraphDetails = true;
     };
 
-    $scope.reloadMonitor = function(sensorId){
+    $scope.monSensor = function(sensorId){
+        $http.post(
+            'http://localhost:5000/api/v1/getMonitoringInfo',
+            {
+                sensorid: sensorId,
+                startDate : $scope.startDate
+            },
+            { cors: true }
+        )
+            .success(function(data){
+                var result = JSON.parse(JSON.stringify(data));
+                if(result.statusCode == 200) {
+                    $scope.hideMonitoringDetails = false;
+                    $scope.hideErrormessage = true;
+                    $scope.hideGraph = false;
+                    $scope.hideGraphDetails = true;
+                    $scope.sensorid = result.sensorid;
+                    console.log(result.cpuutilisationAverage);
+                    $scope.status = result.state;
+                    $scope.cpuUtilizationAvg = result.cpuutilisationAverage;
+                    $scope.networkInMet = result.networkInAverage;
+                    $scope.networkOutMet = result.networkoutAverage;
+
+                    $scope.labels = ["Utilized", "Empty"];
+                    $scope.data = [100 * result.cpuutilisationAverage, 100 - (100 * result.cpuutilisationAverage)];
+
+                    $scope.labelsNetIn = ["Utilized", "Empty"];
+                    $scope.dataNetIn = [result.networkInAverage / 9000, 100 - (result.networkInAverage / 9000)];
+
+                    $scope.labelsNetOut = ["Utilized", "Empty"];
+                    $scope.dataNetOut = [result.networkoutAverage / 200, 100 - (result.networkoutAverage / 200)];
+
+                    $scope.colours = ["#ff1919",
+                        "#808080"];
+                } else if(result.statusCode == 201) {
+                    $scope.hideMonitoringDetails = true;
+                    $scope.hideErrormessage = false;
+                    $scope.hideGraph = true;
+                    $scope.hideGraphDetails = true;
+
+                    $scope.displayerrormessage = "Sensor was launched on " + result.launchtime + " .Please select date after launch date";
+
+                } else if(result.statusCode == 202) {
+                    $scope.hideMonitoringDetails = true;
+                    $scope.hideErrormessage = false;
+                    $scope.hideGraph = true;
+                    $scope.hideGraphDetails = true;
+                    $scope.displayerrormessage = "Please select date before current date";
+
+                } else if(result.statusCode == 203) {
+                    $scope.hideMonitoringDetails = true;
+                    $scope.hideErrormessage = true;
+                    $scope.hideGraph = true;
+                    $scope.hideGraphDetails = false;
+
+                    $scope.sensorid = result.sensorid;
+                    $scope.status = result.state;
+                    $scope.messgae = "Sensor is " + result.state.Name + ". Hence monitoring details is not available";
+                }
+
+            })
+            .error(function(error){
+                console.log('error')
+            })
+    };
+
+/*    $scope.reloadMonitor = function(sensorId){
         $state.go('monitor', {'test':'hi'});
-    }
+    }*/
 
 }
 ]);
