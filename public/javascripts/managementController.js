@@ -83,13 +83,15 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
         });
     };
 
-    $scope.autoScale = function(){
+    $scope.addedResultsDetails = true;
+    $scope.deletedResultsDetails = true;
+    $scope.autoscale = function(){
 
         if($scope.minimumCount > $scope.sensorTypeCount) {
             $http.post(
                 'http://localhost:5000/api/v1/addToSensorHub',
                 {
-                    sensorhubname: $scope.sensorhubname,
+                    sensorhubname: $scope.hubname,
                     sensorType: $scope.sensorType,
                     imageId: $scope.imageId,
                     username: $cookies.get('username'),
@@ -108,11 +110,11 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                     console.log('error')
                 });
 
-        } else  if($scope.maximumCount < $scope.sensorTypeCount) {
+        } else if($scope.maximumCount < $scope.sensorTypeCount) {
             $http.post(
                 'http://localhost:5000/api/v1/deleteFromSensorHub',
                 {
-                    sensorhubname: $scope.sensorhubname,
+                    sensorhubname: $scope.hubname,
                     sensorType: $scope.sensorType,
                     imageId: $scope.imageId,
                     username: $cookies.get('username'),
