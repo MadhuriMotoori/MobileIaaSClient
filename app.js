@@ -32,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use('/', routes);
 app.use('/users', users);
 
+app.post('/listuserSensorDetails', main.listuserSensorDetails);
 app.post('/listsensorhub',main.listsensorhub);
 app.post('/listsensors',main.listsensors);
 app.post('/listSensorInstances', main.listSensorsInstances);

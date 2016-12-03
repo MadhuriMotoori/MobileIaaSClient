@@ -1,6 +1,22 @@
 var ejs= require("ejs");
 var mysql = require('./mysql');
 
+exports.listuserSensorDetails = function (req, res) {
+    var username = req.body.username;
+    var userSensorsInfo = "select * from sensor where UserName = '" + username + "' and Status != 'terminated';";
+    var sensorlist = {};
+    mysql.fetchData(function(err, results) {
+        if (err) {
+            throw err;
+        } else {
+            if (results != null) {
+                sensorlist = results;
+            }
+            var json_response={"statusCode":200,"sensorlist":sensorlist};
+            res.send(json_response);
+        }
+    }, userSensorsInfo);
+};
 
 exports.listsensorhub = function(req, res){
     var username = req.body.username;

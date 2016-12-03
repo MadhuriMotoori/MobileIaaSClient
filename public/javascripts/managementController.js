@@ -2,7 +2,7 @@
 app.controller('managementController',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies) {
     $scope.imageId = "ami-c074d7a0";
 
-    $scope.hideSensorList = true;
+/*    $scope.hideSensorList = true;
     $scope.hideSensorHubName = true;
     $scope.hideMonitoringDetails = true;
     $scope.hideDate = true;
@@ -10,10 +10,43 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
     $scope.hideMonitorForm = false;
     $scope.resultsStartDetails = true;
     $scope.resultsStopDetails = true;
-    $scope.resultsTerminateDetails = true;
+    $scope.resultsTerminateDetails = true;*/
 
 
-    $scope.chooseSensorHub = function () {
+    $scope.hideSensorManager = true;
+    $scope.getUserSensorDetails = function () {
+        $http({
+            method : "POST",
+            url : '/listuserSensorDetails',
+            data : {
+                "username" : $cookies.get('username')
+            }
+        }).success(function(data) {
+            // checking the response data for statusCode
+            if (data.statusCode == 200) {
+                $scope.hideSensorHubName = false;
+                $scope.sensorlist = data.sensorlist;
+            }
+        }).error(function(error) {
+
+        });
+    };
+
+    $scope.hideStop = false;
+    $scope.hideStart = false;
+    $scope.manageSensor = function (sensorInfo) {
+        $scope.selectedSensor = sensorInfo;
+        if(sensorInfo.Status == "running"){
+
+            $scope.hideStop = false;
+            $scope.hideStart = true;
+        } else if(sensorInfo.Status == "stopped"){
+            $scope.hideStart = false;
+            $scope.hideStop = true;
+        }
+    };
+
+/*    $scope.chooseSensorHub = function () {
         $http({
             method : "POST",
             url : '/listsensorhub',
@@ -76,7 +109,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
 
         });
 
-    };
+    };*/
 
     $scope.startSensor = function(instanceId){
         console.log("Startign sensor" + instanceId);
@@ -91,9 +124,9 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                 var result = JSON.parse(JSON.stringify(data));
                 console.log("Result: " + result.statusCode);
                 if(result.statusCode == 200){
-                    $scope.StartedSensorId = instanceId;
-                    $scope.resultsStartDetails = false;
-                    $scope.resultsStopDetails = true;
+                    $scope.message="running";
+                    $scope.selectedSensor.Status = 'running';
+                    $scope.hideSensorManager = false;
                 }
             })
             .error(function(error){
@@ -114,9 +147,9 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                 var result = JSON.parse(JSON.stringify(data));
                 console.log("Result: " + result.statusCode);
                 if(result.statusCode == 200){
-                    $scope.StoppedSensorId = instanceId;
-                    $scope.resultsStartDetails = true;
-                    $scope.resultsStopDetails = false;
+                    $scope.message="stopped";
+                    $scope.selectedSensor.Status = 'stopped';
+                    $scope.hideSensorManager = false;
                 }
             })
             .error(function(error){
@@ -137,10 +170,9 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                 var result = JSON.parse(JSON.stringify(data));
                 console.log("Result: " + result.statusCode);
                 if(result.statusCode == 200){
-                    $scope.TerminatedSensorId = instanceId;
-                    $scope.resultsStartDetails = true;
-                    $scope.resultsStopDetails = true;
-                    $scope.resultsTerminateDetails = false;
+                    $scope.message="terminated";
+                    $scope.selectedSensor.Status = 'terminated';
+                    $scope.hideSensorManager = false;
                 }
             })
             .error(function(error){
