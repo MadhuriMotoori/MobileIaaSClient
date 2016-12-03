@@ -145,6 +145,24 @@
                     }
                 },
                 params: { test: "default value" }
+            })
+            .state('viewSensorsInfo', {
+                url: "/sensorsInfo",
+                views:{
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
+                    },
+                    'sidemenu@':{
+                        templateUrl: 'sidebarView.ejs',
+                        controller: 'navBarController'
+                    },
+                    'main@':{
+                        templateUrl: 'sensorInfo.ejs',
+                        controller : 'viewSensorInfoController'
+                    }
+                },
+                params: { test: "default value" }
             });
 
     });
