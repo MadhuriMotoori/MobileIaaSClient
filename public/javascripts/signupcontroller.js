@@ -2,6 +2,7 @@
 app.controller('signupcontroller',['$state', '$scope','$http',function ($state, $scope, $http){
 
     $scope.addNewUser = function(){
+
         var host = 'http://localhost:5000/';
 
         $http.post(
@@ -30,5 +31,5 @@ app.controller('signupcontroller',['$state', '$scope','$http',function ($state, 
             });
 
     }
-
+    
 }]);
