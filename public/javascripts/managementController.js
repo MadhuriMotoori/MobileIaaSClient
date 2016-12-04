@@ -1,6 +1,6 @@
 "use strict"
 app.controller('managementController',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies) {
-    //$scope.imageId = "ami-c074d7a0";
+   // $scope.imageId = "ami-c074d7a0";
     $scope.imageId = "ami-5ee7443e";
 /*    $scope.hideSensorList = true;
     $scope.hideSensorHubName = true;
@@ -314,8 +314,8 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                     $scope.labelsNetOut = ["Utilized", "Empty"];
                     $scope.dataNetOut = [result.networkoutAverage / 200, 100 - (result.networkoutAverage / 200)];
 
-                    $scope.colours = ["#ff1919",
-                        "#808080"];
+                    $scope.colours = ["#26B99A",
+                        "#34495E"];
                 } else if(result.statusCode == 201) {
                     $scope.hideMonitoringDetails = true;
                     $scope.hideErrormessage = false;

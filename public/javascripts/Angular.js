@@ -57,9 +57,17 @@
             .state('adminprofile', {
                 url: "/adminprofile",
                 views:{
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
+                    },
+                    'sidemenu@':{
+                        templateUrl: 'adminsidebarView.ejs',
+                        controller: 'navBarController'
+                    },
                     'main@':{
-                        templateUrl: 'profile.ejs',
-                        controller : 'profilecontroller'
+                        templateUrl: 'adminprofile.ejs',
+                        controller : 'adminprofilecontroller'
                     }
                 },
                 params: { test: "default value" }
@@ -117,6 +125,10 @@
             .state('monitor', {
                 url: "/monitor",
                 views:{
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
+                    },
                     'sidemenu@':{
                         templateUrl: 'sidebarView.ejs',
                         controller: 'navBarController'
@@ -160,6 +172,24 @@
                     'main@':{
                         templateUrl: 'sensorInfo.ejs',
                         controller : 'viewSensorInfoController'
+                    }
+                },
+                params: { test: "default value" }
+            })
+            .state('deleteSensor', {
+                url: "/deleteSensor",
+                views:{
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
+                    },
+                    'sidemenu@':{
+                        templateUrl: 'adminsidebarView.ejs',
+                        controller: 'navBarController'
+                    },
+                    'main@':{
+                        templateUrl: 'deleteSensor.ejs',
+                        controller : 'deleteSensorController'
                     }
                 },
                 params: { test: "default value" }
