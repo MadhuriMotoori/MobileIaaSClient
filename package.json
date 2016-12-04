@@ -12,6 +12,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "ejs": "~2.5.2",
+    "envs": "^0.1.6",
     "express": "~4.14.0",
     "express-session": "^1.14.2",
     "morgan": "~1.7.0",

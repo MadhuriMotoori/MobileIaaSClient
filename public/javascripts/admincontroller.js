@@ -1,11 +1,12 @@
 
 "use strict"
 app.controller('admincontroller',['$scope','$http','$state','$cookies',function ($scope,$http,$state,$cookies){
-
+    var host = $cookies.get('serverHost');
 
     $scope.adminValidate = function(){
         $http.post(
-                'http://localhost:5000/api/v1/adminValidate',
+                host + '/adminValidate',
+                //'http://localhost:5000/api/v1/adminValidate',
                 {
                     username:$scope.username,
                     password:$scope.password

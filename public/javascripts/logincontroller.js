@@ -1,10 +1,11 @@
 
 "use strict"
   app.controller('logincontroller',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies){
-
+     // var host = 'http://localhost:5000/';
+      var host = 'http://ec2-54-202-217-166.us-west-2.compute.amazonaws.com:5000/';
       $scope.signIn = function(){
       $http.post(
-                  'http://localhost:5000/api/v1/validate',
+                  host + 'api/v1/validate',
                   {
                       username: $scope.username,
                       password: $scope.password
@@ -15,6 +16,7 @@
              if(data.statusCode == 200)
                  {
                       $cookies.put('username',$scope.username);
+                      $cookies.put('serverHost', host);
                       $state.go('profile',{'test':data.username});
                  }
                   else

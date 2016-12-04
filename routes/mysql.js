@@ -4,13 +4,14 @@ var setup = require('./setup');
 var poolConfig = setup.dbpoolsize;
 var pool = [];
 var db = setup.db;
+var envs = require('envs');
 
 function getConnection() {
     var connection = mysql.createConnection({
-        host: '127.0.0.1', //host where mysql server is running
-        user: 'root', //user for the mysql application
-        password: '', //password for the mysql application
-        database: 'InfraSense-dev', //database name
+        host: envs('dbhost'), //host where mysql server is running
+        user: envs('dbuser'), //user for the mysql application
+        password: envs('dbpassword'), //password for the mysql application
+        database: envs('dbdatabase'), //database name
         port: 3306 //port, it is 3306 by default for mysql
     });
     return connection;
