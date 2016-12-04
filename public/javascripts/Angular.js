@@ -228,6 +228,24 @@
                     }
                 },
                 params: { test: "default value" }
+            })
+            .state('viewSensorData', {
+                url: "/sensorData",
+                views:{
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
+                    },
+                    'sidemenu@':{
+                        templateUrl: 'sidebarView.ejs',
+                        controller: 'navBarController'
+                    },
+                    'main@':{
+                        templateUrl: 'viewSensorData.ejs',
+                        controller : 'managementController'
+                    }
+                },
+                params: { test: "default value" }
             });
 
     });
