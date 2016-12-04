@@ -2,8 +2,10 @@
 app.controller('signupcontroller',['$state', '$scope','$http',function ($state, $scope, $http){
 
     $scope.addNewUser = function(){
+        var host = 'http://localhost:5000/';
+
         $http.post(
-            'http://localhost:5000/api/v1/register',
+            host + 'api/v1/register',
             {
                 UserName : $scope.new_user,
                 EmailId : $scope.new_email,
