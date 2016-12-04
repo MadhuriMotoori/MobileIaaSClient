@@ -192,6 +192,42 @@
                     }
                 },
                 params: { test: "default value" }
+            })
+            .state('manageUser', {
+                url: "/manageUser",
+                views:{
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
+                    },
+                    'sidemenu@':{
+                        templateUrl: 'adminsidebarView.ejs',
+                        controller: 'navBarController'
+                    },
+                    'main@':{
+                        templateUrl: 'manageUser.ejs',
+                        controller : 'manageUserController'
+                    }
+                },
+                params: { test: "default value" }
+            })
+            .state('editSensor', {
+                url: "/editSensor",
+                views:{
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
+                    },
+                    'sidemenu@':{
+                        templateUrl: 'adminsidebarView.ejs',
+                        controller: 'navBarController'
+                    },
+                    'main@':{
+                        templateUrl: 'editSensor.ejs',
+                        controller : 'editSensorController'
+                    }
+                },
+                params: { test: "default value" }
             });
 
     });

@@ -331,14 +331,14 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                     $scope.hideGraph = true;
                     $scope.hideGraphDetails = true;
 
-                    $scope.displayerrormessage = "Sensor was launched on " + result.launchtime + " .Please select date after launch date";
+                    $scope.displayerrormessage = "Sensor was launched on " + result.launchtime + " .Please select date and time after launch date";
 
                 } else if(result.statusCode == 202) {
                     $scope.hideMonitoringDetails = true;
                     $scope.hideErrormessage = false;
                     $scope.hideGraph = true;
                     $scope.hideGraphDetails = true;
-                    $scope.displayerrormessage = "Please select date before current date";
+                    $scope.displayerrormessage = "Please select date and time before current date and time";
 
                 } else if(result.statusCode == 203) {
                     $scope.hideMonitoringDetails = true;
@@ -349,6 +349,12 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                     $scope.sensorid = result.sensorid;
                     $scope.status = result.state;
                     $scope.messgae = "Sensor is " + result.state.Name + ". Hence monitoring details is not available";
+                } else if(result.statusCode == 205) {
+                    $scope.hideMonitoringDetails = true;
+                    $scope.hideErrormessage = false;
+                    $scope.hideGraph = true;
+                    $scope.hideGraphDetails = true;
+                    $scope.displayerrormessage = "No data available for this date and time. Pease check after some time";
                 }
 
             })
