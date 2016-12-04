@@ -1,7 +1,7 @@
 
 "use strict"
   app.controller('createsensorhubcontroller',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies){
-
+      var host = $cookies.get('serverHost');
 	  $scope.imageId = "ami-5ee7443e";
 	  $scope.hideCart = true;
 	  $scope.sensorType='Temperature Sensor';
@@ -26,7 +26,7 @@
       $scope.addSensorHub = function(){
       	console.log($scope.imageId);
           $http.post(
-              'http://localhost:5000/api/v1/createSensorHub',
+               host + 'api/v1/createSensorHub',
               {
                   sensorhubname: $scope.sensorhubname,
                   addsensors: JSON.stringify($scope.sensorList),

@@ -1,11 +1,12 @@
 "use strict"
 app.controller('viewSensorInfoController',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies) {
+    var host = $cookies.get('serverHost');
 
     $scope.hideSensorManager = true;
     $scope.getUserAllSensorDetails = function () {
         $http({
             method : "POST",
-            url : 'http://localhost:5000/api/v1/getUserSensorDetails',
+            url : host + 'api/v1/getUserSensorDetails',
             data : {
                 "username" : $cookies.get('username')
             }

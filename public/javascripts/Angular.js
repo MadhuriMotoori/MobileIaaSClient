@@ -4,7 +4,6 @@
 "use strict"
  var app = angular.module('spa',['chart.js','ui.router','ui.bootstrap','ngCookies', 'ngStorage']);
     app.config(function($stateProvider, $urlRouterProvider){
-
         $urlRouterProvider.otherwise('/');
 
         $stateProvider

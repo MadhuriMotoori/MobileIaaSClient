@@ -1,9 +1,7 @@
 "use strict"
-app.controller('signupcontroller',['$state', '$scope','$http',function ($state, $scope, $http){
-
+app.controller('signupcontroller',['$state', '$scope','$http', '$cookies',function ($state, $scope, $http, $cookies){
+    var host = 'http://mydbinstance.cmxia5o2lhpo.us-west-2.rds.amazonaws.com:5000/';
     $scope.addNewUser = function(){
-        var host = 'http://localhost:5000/';
-
         $http.post(
             host + 'api/v1/register',
             {

@@ -1,5 +1,7 @@
 "use strict"
 app.controller('managementController',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies) {
+    var host = $cookies.get('serverHost');
+
     //$scope.imageId = "ami-c074d7a0";
     $scope.imageId = "ami-5ee7443e";
 /*    $scope.hideSensorList = true;
@@ -92,7 +94,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
 
         if($scope.minimumCount > $scope.sensorTypeCount) {
             $http.post(
-                'http://localhost:5000/api/v1/addToSensorHub',
+                 host + 'api/v1/addToSensorHub',
                 {
                     sensorhubname: $scope.hubname,
                     sensorType: $scope.sensorType,
@@ -115,7 +117,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
 
         } else if($scope.maximumCount < $scope.sensorTypeCount) {
             $http.post(
-                'http://localhost:5000/api/v1/deleteFromSensorHub',
+                 host + 'api/v1/deleteFromSensorHub',
                 {
                     sensorhubname: $scope.hubname,
                     sensorType: $scope.sensorType,
@@ -209,7 +211,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
     $scope.startSensor = function(instanceId){
         console.log("Startign sensor" + instanceId);
         $http.post(
-            'http://localhost:5000/api/v1/start',
+            host + 'api/v1/start',
             {
                 instanceid: instanceId
             },
@@ -232,7 +234,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
     $scope.stopSensor = function(instanceId){
         console.log("Stopping Sensor" + instanceId);
         $http.post(
-            'http://localhost:5000/api/v1/stop',
+            host + 'api/v1/stop',
             {
                 instanceid: instanceId
             },
@@ -255,7 +257,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
     $scope.terminateSensor = function(instanceId){
         console.log("Terminating Sensor" + instanceId);
         $http.post(
-            'http://localhost:5000/api/v1/terminate',
+            host + 'api/v1/terminate',
             {
                 instanceid: instanceId
             },
@@ -284,7 +286,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
 
     $scope.monSensor = function(sensorId){
         $http.post(
-            'http://localhost:5000/api/v1/getMonitoringInfo',
+            host + 'api/v1/getMonitoringInfo',
             {
                 sensorid: sensorId,
                 startDate : $scope.startDate
