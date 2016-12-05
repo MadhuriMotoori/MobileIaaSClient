@@ -57,9 +57,17 @@
             .state('adminprofile', {
                 url: "/adminprofile",
                 views:{
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
+                    },
+                    'sidemenu@':{
+                        templateUrl: 'sidebarView.ejs',
+                        controller: 'navBarController'
+                    },
                     'main@':{
-                        templateUrl: 'profile.ejs',
-                        controller : 'profilecontroller'
+                        templateUrl: 'admindashboard.ejs',
+                        controller : 'adminprofilecontroller'
                     }
                 },
                 params: { test: "default value" }
