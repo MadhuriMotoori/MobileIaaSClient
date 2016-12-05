@@ -33,7 +33,7 @@
             $scope.sensors_per_cluster();
         };
         
-        $interval(updatedashboard, 5*60000);
+        $interval(updatedashboard,1000,1);
         
         $scope.total_users = function(){
             $http.get('http://localhost:5000/api/v1/totalusers')

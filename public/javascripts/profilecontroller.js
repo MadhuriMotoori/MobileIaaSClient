@@ -30,8 +30,8 @@
             $scope.user_sensor_per_cluster();
             $scope.user_sensor_typecount();
         };
-        
-        $interval(updatedashboard, 5000);
+
+        $interval(updatedashboard, 1000,1);
 
         $scope.user_sensors_count = function(){
             $http.post(
