@@ -1,32 +1,35 @@
 
 "use strict"
   app.controller('createsensorhubcontroller',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies){
-
+      var host = $cookies.get('serverHost');
+      //var host = 'http://localhost:5000/';
 	  $scope.imageId = "ami-5ee7443e";
+      //$scope.imageId = "ami-c074d7a0";
+      var sensors=[];
 	  $scope.hideCart = true;
-	  $scope.sensorType='Temperature Sensor';
-	  var addsensors= [{id: 1 , type: 'Temperature Sensor', region: 'NewYork' , count: 0},{id: 2 , type: 'Pressure Sensor', region:'SanJose', count: 0},
-          {id:3, type: 'Salinity Sensor', region: 'SantaClara' ,count: 0},{id: 4, type: 'Oxygen Sensor', region:'Seattle' , count: 0} ];
+	  $scope.sensorTypeRegion='Temperature Sensor in NewYork';
 	  $scope.sensorhubname = "";
       $scope.resultsDetails = true;
       $scope.username = $cookies.get('username');
-      $scope.sensorList = addsensors;
+
       $scope.addSensor = function(){
-      	$scope.hideCart = false;
-          for (var i = 0; i < addsensors.length; i++) {
-              if (addsensors[i].type == $scope.sensorType) {
-                  addsensors[i].count++;
+          var typeRegion = $scope.sensorTypeRegion.split("-");
+
+          $scope.hideCart = false;
+          for (var i = 0; i < sensors.length; i++) {
+              if (sensors[i].type == typeRegion[0] && sensors[i].region == typeRegion[2]) {
+                  sensors[i].count++;
                   break;
               }
           }
 
-          $scope.sensorList = addsensors;
+          $scope.sensorList = sensors;
       };
       
       $scope.addSensorHub = function(){
       	console.log($scope.imageId);
           $http.post(
-              'http://localhost:5000/api/v1/createSensorHub',
+               host + 'api/v1/createSensorHub',
               {
                   sensorhubname: $scope.sensorhubname,
                   addsensors: JSON.stringify($scope.sensorList),
@@ -39,14 +42,40 @@
                   var result = JSON.parse(JSON.stringify(data));
                   console.log(result.statusCode);
                   console.log(result.instanceDetails);
-                  $scope.sensors = result.instanceDetails;
+                  $scope.createdSensors = result.instanceDetails;
                   $scope.resultsDetails = false;
               })
               .error(function(error){
                   console.log('error')
               });
+      }
 
-    	  //$state.go('profile');
+      $scope.getSensorTypeDetails = function(){
+          $http.get(
+              host + 'api/v1/getAvailableSensorTypesDetails',
+              { cors: true }
+          ).success(function(data){
+                  var result = JSON.parse(JSON.stringify(data));
+                  console.log(result.statusCode);
+                  $scope.sensors = result.instanceDetails;
+                  $scope.resultsDetails = false;
+              if(data.statusCode == 200){
+                  for (var i = 0; i < data.instanceDetails.length; i++) {
+                      var addsensor = {id:"", type:"", region:"", count:""};
+                      addsensor['id'] = data.instanceDetails[i].index;
+                      addsensor['type'] = data.instanceDetails[i].SensorType;
+                      addsensor['region'] = data.instanceDetails[i].Region;
+                      addsensor['count'] = 0;
+                      addsensor['dropdownInfo'] = addsensor.type + "-in-" + addsensor.region;
+                      sensors.push(addsensor);
+                  }
+
+                  $scope.sensorList = sensors;
+              }
+              })
+              .error(function(error){
+                  console.log('error')
+              });
       }
       
   }]);

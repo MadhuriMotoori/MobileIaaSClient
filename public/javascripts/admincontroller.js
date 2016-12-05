@@ -1,11 +1,12 @@
 
 "use strict"
 app.controller('admincontroller',['$scope','$http','$state','$cookies',function ($scope,$http,$state,$cookies){
-
+    var host = $cookies.get('serverHost');
+    //var host = 'http://localhost:5000/';
 
     $scope.adminValidate = function(){
         $http.post(
-                'http://localhost:5000/adminValidate',
+                host + 'api/v1/adminValidate',
                 {
                     username:$scope.username,
                     password:$scope.password
@@ -17,11 +18,10 @@ app.controller('admincontroller',['$scope','$http','$state','$cookies',function 
                 if(data.statusCode == 200)
                 {
                     $cookies.put('username',$scope.username);
-                    $state.go('adminprofile',{'test':'admin profile'});
+                    $state.go('adminprofile',{'test':data.username});
                 }
                 else
                 {
-                    /*do something*/
                     
                 }
 
@@ -30,24 +30,4 @@ app.controller('admincontroller',['$scope','$http','$state','$cookies',function 
                 console.log('error');
             })
     }
-
-    /*$scope.save_session = function(){
-        $http.post(
-            '/saveSession',
-            {
-              username : $scope.username
-            })
-            .success(function (data) {
-                if(data.statusCode == 200){
-                    console.log('session saved');
-                    console.log(request.session.username)
-                }
-                else
-                {
-                    console.log('session not saved');
-                }
-        }).error(function(data){
-            console.log('something wrong with client');
-        })
-    }*/
 }]);

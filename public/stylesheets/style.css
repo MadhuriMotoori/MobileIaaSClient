@@ -18,6 +18,7 @@
 }
 .panel-pricing .panel-heading {
     padding: 20px 10px;
+    background-color: #f0f0f0;
 }
 .panel-pricing .panel-heading .fa {
     margin-top: 10px;
@@ -28,15 +29,15 @@
     border-bottom: 1px solid rgba(250, 250, 250, 0.5);
 }
 .panel-pricing .list-group-item:last-child {
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 .panel-pricing .list-group-item:first-child {
-    border-top-right-radius: 0px;
-    border-top-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 .panel-pricing .panel-body {
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     font-size: 40px;
     color: #777777;
     padding: 20px;

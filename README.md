@@ -1,8 +1,10 @@
 # InfraSense - Mobile Infrastructure as a service 
 
 ## contributors(please add your name to contributors)
+* Madhuri Motoori
 * Akash kashyap
 * Tushara
+* Chandana Rao
 
 
 ## Guidelines

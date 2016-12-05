@@ -24,30 +24,21 @@
         <div class="menu_section">
             <h3> General </h3>
             <ul class="nav side-menu">
-                <li ng-class="{active:isSelected(1)}"><a ng-click="select(1)" ui-sref="profile"><i class="fa fa-home"
+                <li ng-class="{active:isSelected(1)}"><a ng-click="select(1)" ui-sref="adminprofile"><i class="fa fa-home"
                                                                                                    aria-hidden="true"></i><span
                                 class="hidden-xs hidden-sm">DashBoard</span></a></li>
-                <li ng-class="{active:isSelected(2)}"><a ng-click="select(2)" ui-sref="createSensorHub"><i
-                                class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Create Sensor Cluster</span></a>
-                </li>
-                <li ng-class="{active:isSelected(6)}"><a ng-click="select(6)" ui-sref="sensorManagement"><i class="fa fa-edit"
+                <li ng-class="{active:isSelected(6)}"><a ng-click="select(6)" ui-sref="manageUser"><i class="fa fa-edit"
                                                                                                             aria-hidden="true"></i><span
-                                class="hidden-xs hidden-sm">Management</span></a></li>
-                <li ng-class="{active:isSelected(3)}"><a ng-click="select(3)" ui-sref="monitor"><i class="fa fa-bar-chart"
+                                class="hidden-xs hidden-sm">Manage Users</span></a></li>
+                <li ng-class="{active:isSelected(3)}"><a ng-click="select(3)" ui-sref="addSensor"><i class="fa fa-bar-chart"
                                                                                                    aria-hidden="true"></i><span
-                                class="hidden-xs hidden-sm">Monitor</span></a></li>
-                <li ng-class="{active:isSelected(8)}"><a ng-click="select(8)" ui-sref="viewSensorData"><i class="fa fa-bar-chart"
-                                                                                                          aria-hidden="true"></i><span
-                                class="hidden-xs hidden-sm">View Sensor Data</span></a></li>
-                <li ng-class="{active:isSelected(4)}"><a ng-click="select(4)" ui-sref="billing"><i class="fa fa-user"
-                                                                                                   aria-hidden="true"></i><span
-                                class="hidden-xs hidden-sm">Billing</span></a></li>
-                <li ng-class="{active:isSelected(5)}"><a ng-click="select(5)" ui-sref="autoscaling"><i class="fa fa-calendar"
+                                class="hidden-xs hidden-sm">Add SensorType</span></a></li>
+                <li ng-class="{active:isSelected(4)}"><a ng-click="select(4)"  ui-sref="deleteSensor"><i class="fa fa-user"
+                                                                                          aria-hidden="true"></i><span
+                                class="hidden-xs hidden-sm">Remove SensorType</span></a></li>
+                <li ng-class="{active:isSelected(5)}"><a ng-click="select(5)" ui-sref="editSensor"><i class="fa fa-calendar"
                                                                                                        aria-hidden="true"></i><span
-                                class="hidden-xs hidden-sm">Auto Scaling</span></a></li>
-                <li ng-class="{active:isSelected(7)}"><a ng-click="select(7)" ui-sref="viewSensorsInfo"><i class="fa fa-desktop"
-                                                                                                           aria-hidden="true"></i><span
-                                class="hidden-xs hidden-sm">View Sensors Info</span></a></li>
+                                class="hidden-xs hidden-sm">Edit Charges</span></a></li>
             </ul>
         </div>
         <div class="menu_section">

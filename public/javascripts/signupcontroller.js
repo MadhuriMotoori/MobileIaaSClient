@@ -1,16 +1,14 @@
 "use strict"
-app.controller('signupcontroller',['$state', '$scope','$http',function ($state, $scope, $http){
-
+app.controller('signupcontroller',['$state', '$scope','$http', '$cookies',function ($state, $scope, $http, $cookies){
+    var host = 'http://localhost:5000/';
+    //var host = 'http://ec2-54-202-217-166.us-west-2.compute.amazonaws.com:5000/';
     $scope.addNewUser = function(){
-
-        var host = 'http://localhost:5000/';
-
         $http.post(
             host + 'api/v1/register',
             {
                 UserName : $scope.new_user,
                 EmailId : $scope.new_email,
-                Password: $scope.new_password
+                Password: $scope.new_password,
             },
             { cors:true}
         )
@@ -31,5 +29,5 @@ app.controller('signupcontroller',['$state', '$scope','$http',function ($state, 
             });
 
     }
-    
+
 }]);

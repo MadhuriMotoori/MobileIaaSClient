@@ -1,21 +1,15 @@
 "use strict"
 app.controller('managementController',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies) {
-    //$scope.imageId = "ami-c074d7a0";
+    var host = $cookies.get('serverHost');
+    //var host = 'http://localhost:5000/';
+     //$scope.imageId = "ami-c074d7a0";
     $scope.imageId = "ami-5ee7443e";
-/*    $scope.hideSensorList = true;
-    $scope.hideSensorHubName = true;
-
-    $scope.hideDate = true;
-    $scope.hideMonitoringDetails = true;
-    $scope.hideMonitorForm = false;
-    $scope.resultsStartDetails = true;
-    $scope.resultsStopDetails = true;
-    $scope.resultsTerminateDetails = true;*/
     $scope.hideSensorManager = true;
     $scope.hideMonitoringDetails = true;
     $scope.hideGraph = true;
     $scope.hideErrormessage = true;
     $scope.hideGraphDetails = true;
+    $scope.hideData =true;
 
     $scope.getUserSensorDetails = function () {
         $http({
@@ -92,7 +86,8 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
 
         if($scope.minimumCount > $scope.sensorTypeCount) {
             $http.post(
-                'http://localhost:5000/api/v1/addToSensorHub',
+                host + 'api/v1/addToSensorHub',
+                //'http://localhost:5000/api/v1/addToSensorHub',
                 {
                     sensorhubname: $scope.hubname,
                     sensorType: $scope.sensorType,
@@ -101,7 +96,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                     count: $scope.minimumCount - $scope.sensorTypeCount
                 },
                 {cors: true}
-                )
+            )
                 .success(function (data) {
                     var result = JSON.parse(JSON.stringify(data));
                     console.log(result.statusCode);
@@ -115,7 +110,8 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
 
         } else if($scope.maximumCount < $scope.sensorTypeCount) {
             $http.post(
-                'http://localhost:5000/api/v1/deleteFromSensorHub',
+                host + 'api/v1/deleteFromSensorHub',
+                //'http://localhost:5000/api/v1/deleteFromSensorHub',
                 {
                     sensorhubname: $scope.hubname,
                     sensorType: $scope.sensorType,
@@ -124,7 +120,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                     count:  $scope.sensorTypeCount - $scope.maximumCount
                 },
                 {cors: true}
-                )
+            )
                 .success(function (data) {
                     var result = JSON.parse(JSON.stringify(data));
                     console.log(result.statusCode);
@@ -135,8 +131,6 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                 .error(function (error) {
                     console.log('error')
                 });
-
-            //$state.go('profile');
         }
 
 
@@ -179,37 +173,35 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
         });
     };
 
-/*
-    $scope.getSensorInstances = function () {
-        console.log("HubName: "+ $scope.hubname + "username:" + $cookies.get('username') + "SensorType: "
-            + $scope.sensortypename);
-        $http({
-            method : "POST",
-            url : '/listSensorInstances',
-            data : {
-                "hubname" : $scope.hubname,
-                "username" : $cookies.get('username'),
-                "sensorType": $scope.sensortypename
-            }
-        }).success(function(data) {
-            // checking the response data for statusCode
-            if (data.statusCode == 200) {
-                console.log("Data received:" + JSON.stringify(data));
-                $scope.hideSensorHubName = false;
-                $scope.hideSensorInstancesList = false;
-                $scope.hideDate = false;
-                $scope.sensorInstanceslist = data.sensorInstanceslist;
-            }
-        }).error(function(error) {
-
-        });
-
-    };*/
+    /*
+     $scope.getSensorInstances = function () {
+     console.log("HubName: "+ $scope.hubname + "username:" + $cookies.get('username') + "SensorType: "
+     + $scope.sensortypename);
+     $http({
+     method : "POST",
+     url : '/listSensorInstances',
+     data : {
+     "hubname" : $scope.hubname,
+     "username" : $cookies.get('username'),
+     "sensorType": $scope.sensortypename
+     }
+     }).success(function(data) {
+     // checking the response data for statusCode
+     if (data.statusCode == 200) {
+     console.log("Data received:" + JSON.stringify(data));
+     $scope.hideSensorHubName = false;
+     $scope.hideSensorInstancesList = false;
+     $scope.hideDate = false;
+     $scope.sensorInstanceslist = data.sensorInstanceslist;
+     }
+     }).error(function(error) {
+     });
+     };*/
 
     $scope.startSensor = function(instanceId){
         console.log("Startign sensor" + instanceId);
         $http.post(
-            'http://localhost:5000/api/v1/start',
+            host + 'api/v1/start',
             {
                 instanceid: instanceId
             },
@@ -232,7 +224,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
     $scope.stopSensor = function(instanceId){
         console.log("Stopping Sensor" + instanceId);
         $http.post(
-            'http://localhost:5000/api/v1/stop',
+            host + 'api/v1/stop',
             {
                 instanceid: instanceId
             },
@@ -255,7 +247,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
     $scope.terminateSensor = function(instanceId){
         console.log("Terminating Sensor" + instanceId);
         $http.post(
-            'http://localhost:5000/api/v1/terminate',
+            host + 'api/v1/terminate',
             {
                 instanceid: instanceId
             },
@@ -275,82 +267,38 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
             })
     };
 
-    $scope.monitorSensor = function (sensorInfo) {
-        $scope.selectedSensor = sensorInfo;
+    $scope.getSensorData = function (sensorId) {
         $scope.hideMonitoringDetails = true;
         $scope.hideErrormessage = true;
         $scope.hideGraphDetails = true;
-    };
 
-    $scope.monSensor = function(sensorId){
+
         $http.post(
-            'http://localhost:5000/api/v1/getMonitoringInfo',
+            '/getSensorData',
             {
                 sensorid: sensorId,
-                startDate : $scope.startDate
+                startDate : $scope.startDate,
+                username : $cookies.get('username')
             },
             { cors: true }
         )
             .success(function(data){
-                var result = JSON.parse(JSON.stringify(data));
-                if(result.statusCode == 200) {
+                if(data.statusCode == 200) {
                     $scope.hideMonitoringDetails = false;
                     $scope.hideErrormessage = true;
-                    $scope.hideGraph = false;
+                    $scope.hideData = false;
                     $scope.hideGraphDetails = true;
-                    $scope.sensorid = result.sensorid;
-                    console.log(result.cpuutilisationAverage);
-                    $scope.status = result.state;
-                    $scope.cpuUtilizationAvg = result.cpuutilisationAverage;
-                    $scope.networkInMet = result.networkInAverage;
-                    $scope.networkOutMet = result.networkoutAverage;
-
-                    $scope.labels = ["Utilized", "Empty"];
-                    $scope.data = [100 * result.cpuutilisationAverage, 100 - (100 * result.cpuutilisationAverage)];
-
-                    $scope.labelsNetIn = ["Utilized", "Empty"];
-                    $scope.dataNetIn = [result.networkInAverage / 9000, 100 - (result.networkInAverage / 9000)];
-
-                    $scope.labelsNetOut = ["Utilized", "Empty"];
-                    $scope.dataNetOut = [result.networkoutAverage / 200, 100 - (result.networkoutAverage / 200)];
-
-                    $scope.colours = ["#ff1919",
-                        "#808080"];
-                } else if(result.statusCode == 201) {
-                    $scope.hideMonitoringDetails = true;
-                    $scope.hideErrormessage = false;
-                    $scope.hideGraph = true;
-                    $scope.hideGraphDetails = true;
-
-                    $scope.displayerrormessage = "Sensor was launched on " + result.launchtime + " .Please select date after launch date";
-
-                } else if(result.statusCode == 202) {
-                    $scope.hideMonitoringDetails = true;
-                    $scope.hideErrormessage = false;
-                    $scope.hideGraph = true;
-                    $scope.hideGraphDetails = true;
-                    $scope.displayerrormessage = "Please select date before current date";
-
-                } else if(result.statusCode == 203) {
-                    $scope.hideMonitoringDetails = true;
-                    $scope.hideErrormessage = true;
-                    $scope.hideGraph = true;
-                    $scope.hideGraphDetails = false;
-
-                    $scope.sensorid = result.sensorid;
-                    $scope.status = result.state;
-                    $scope.messgae = "Sensor is " + result.state.Name + ". Hence monitoring details is not available";
+                    $scope.sensorData = data.sensorData;
                 }
-
             })
             .error(function(error){
                 console.log('error')
             })
     };
-
-/*    $scope.reloadMonitor = function(sensorId){
-        $state.go('monitor', {'test':'hi'});
-    }*/
-
 }
 ]);
+app.filter('dateToUTC', function() {
+    return function(input) {
+        return new Date(input).toUTCString();
+    };
+});

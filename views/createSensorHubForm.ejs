@@ -1,5 +1,5 @@
 <!-- page content -->
-<div class="right_col" role="main">
+<div class="right_col" role="main" ng-init="getSensorTypeDetails()">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -25,8 +25,16 @@
                 <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
                         <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Sensor Type <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select  id="sensorTypeRegion" name="sensorTypeRegion" class="select2_group form-control" ng-model="sensorTypeRegion" ng-options="name.dropdownInfo as name.dropdownInfo for name in sensorList">
+                                </select>
+                            </div>
+                        </div>
+
+
+<!--                        <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sensorType">Sensor Type <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -37,7 +45,7 @@
                                     <option value="Oxygen Sensor">Oxygen Sensor</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
 <!--                        <div class="form-group">
                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Region</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -184,7 +192,7 @@
                             </thead>
 
                             <tbody>
-                            <tr class="odd pointer" ng-repeat="sensor in sensors">
+                            <tr class="odd pointer" ng-repeat="sensor in createdSensors">
                                 <td class=" ">{{sensor.index}}</td>
                                 <td class=" ">{{sensor.sensorhubname}}</td>
                                 <td class=" ">{{sensor.SensorType}}</td>

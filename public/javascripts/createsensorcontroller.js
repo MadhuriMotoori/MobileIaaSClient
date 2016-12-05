@@ -1,10 +1,14 @@
 
 "use strict"
   app.controller('createsensorcontroller',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies){
+      var host = $cookies.get('serverHost');
+      //var host = 'http://localhost:5000/';
+
       $scope.addSensorToHub = function(){
     	  alert('Value ' + $scope.sensorname);
-      $http.post(
-                  'http://localhost:5000/api/v1/validate',
+
+          $http.post(
+                   host + 'api/v1/validate',
                   {
                       sensorname: $scope.sensorname
                   },
@@ -26,9 +30,7 @@
               })
       
       }
-      
       $scope.cancel = function(){
     	  $state.go('createSensorHub');
       }
-      
   }]);
