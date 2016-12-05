@@ -282,6 +282,24 @@ app.config(function($stateProvider, $urlRouterProvider){
                 }
             },
             params: { test: "default value" }
+        })
+        .state('monitorSensorAdmin', {
+            url: "/monitorSensorAdmin",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
+                },
+                'sidemenu@':{
+                    templateUrl: 'adminsidebarView.ejs',
+                    controller: 'navBarController'
+                },
+                'main@':{
+                    templateUrl: 'monitorSensorAdmin.ejs',
+                    controller : 'monitorSensorAdminController'
+                }
+            },
+            params: { test: "default value" }
         });
 
 });
