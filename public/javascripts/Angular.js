@@ -300,6 +300,23 @@ app.config(function($stateProvider, $urlRouterProvider){
                 }
             },
             params: { test: "default value" }
+        })
+        .state('deleteSensorHub', {
+            url: "/deleteSensorHub",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
+                },
+                'sidemenu@':{
+                    templateUrl: 'sidebarView.ejs',
+                    controller: 'navBarController'
+                },
+                'main@':{
+                    templateUrl: 'deleteSensorHubForm.ejs',
+                    controller : 'deleteSensorHubController'
+                }
+            },
+            params: { test: "default value" }
         });
-
 });
