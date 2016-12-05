@@ -2,9 +2,11 @@
 "use strict"
 app.controller('editSensorController',['$scope','$http','$state','$cookies',function ($scope,$http,$state,$cookies){
     $scope.hidemessage = true;
+    var host = $cookies.get('serverHost');
+    //var host = 'http://localhost:5000/';
     $scope.getSensorDetails = function () {
         $http.post(
-            'http://localhost:5000/api/v1/getSensorDetails',
+            host + 'api/v1/getSensorDetails',
             {
                 'username' : $cookies.get('username')
             },
@@ -23,7 +25,7 @@ app.controller('editSensorController',['$scope','$http','$state','$cookies',func
     $scope.editSensor = function (sensorType,region,charges) {
         $scope.hidemessage = true;
         $http.post(
-            'http://localhost:5000/api/v1/editSensor',
+            host + 'api/v1/editSensor',
             {
                 'sensorType' : sensorType,
                 'region' : region,

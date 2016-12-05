@@ -2,7 +2,9 @@
 "use strict"
   app.controller('createsensorhubcontroller',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies){
       var host = $cookies.get('serverHost');
+      //var host = 'http://localhost:5000/';
 	  $scope.imageId = "ami-5ee7443e";
+      //$scope.imageId = "ami-c074d7a0";
 	  $scope.hideCart = true;
 	  $scope.sensorType='Temperature Sensor';
 	  var addsensors= [{id: 1 , type: 'Temperature Sensor', region: 'NewYork' , count: 0},{id: 2 , type: 'Pressure Sensor', region:'SanJose', count: 0},
@@ -45,8 +47,6 @@
               .error(function(error){
                   console.log('error')
               });
-
-    	  //$state.go('profile');
       }
       
   }]);

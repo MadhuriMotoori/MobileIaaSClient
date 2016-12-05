@@ -1,18 +1,9 @@
 "use strict"
 app.controller('managementController',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies) {
     var host = $cookies.get('serverHost');
-
-    //$scope.imageId = "ami-c074d7a0";
-    // $scope.imageId = "ami-c074d7a0";
+    //var host = 'http://localhost:5000/';
+     //$scope.imageId = "ami-c074d7a0";
     $scope.imageId = "ami-5ee7443e";
-    /*    $scope.hideSensorList = true;
-     $scope.hideSensorHubName = true;
-     $scope.hideDate = true;
-     $scope.hideMonitoringDetails = true;
-     $scope.hideMonitorForm = false;
-     $scope.resultsStartDetails = true;
-     $scope.resultsStopDetails = true;
-     $scope.resultsTerminateDetails = true;*/
     $scope.hideSensorManager = true;
     $scope.hideMonitoringDetails = true;
     $scope.hideGraph = true;
@@ -140,8 +131,6 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                 .error(function (error) {
                     console.log('error')
                 });
-
-            //$state.go('profile');
         }
 
 
@@ -213,7 +202,6 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
         console.log("Startign sensor" + instanceId);
         $http.post(
             host + 'api/v1/start',
-            //'http://localhost:5000/api/v1/start',
             {
                 instanceid: instanceId
             },
@@ -237,7 +225,6 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
         console.log("Stopping Sensor" + instanceId);
         $http.post(
             host + 'api/v1/stop',
-            //'http://localhost:5000/api/v1/stop',
             {
                 instanceid: instanceId
             },
@@ -261,7 +248,6 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
         console.log("Terminating Sensor" + instanceId);
         $http.post(
             host + 'api/v1/terminate',
-            //'http://localhost:5000/api/v1/terminate',
             {
                 instanceid: instanceId
             },
@@ -291,7 +277,6 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
     $scope.monSensor = function(sensorId){
         $http.post(
             host + 'api/v1/getMonitoringInfo',
-            //'http://localhost:5000/api/v1/getMonitoringInfo',
             {
                 sensorid: sensorId,
                 startDate : $scope.startDate
@@ -299,7 +284,9 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
             { cors: true }
         )
             .success(function(data){
+
                 var result = JSON.parse(JSON.stringify(data));
+                console.log(result.launchtime);
                 if(result.statusCode == 200) {
                     $scope.hideMonitoringDetails = false;
                     $scope.hideErrormessage = true;
@@ -329,14 +316,19 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                     $scope.hideGraph = true;
                     $scope.hideGraphDetails = true;
 
-                    $scope.displayerrormessage = "Sensor was launched on " + result.launchtime + " .Please select date and time after launch date";
+                    //var tzoffset = (result.launchtime).getTimezoneOffset() * 60000; //offset in milliseconds
+                    //var localISOTime = (new Date(result.launchtime - tzoffset)).toISOString().slice(0,16);
+                    //alert(localISOTime);
+                    //new Date().toISOString().slice(0,16);//"2015-04-12T11:42";
+
+                    $scope.displayerrormessage = "Sensor was launched on " + result.launchtime + ". Please select date and time after launch date.";
 
                 } else if(result.statusCode == 202) {
                     $scope.hideMonitoringDetails = true;
                     $scope.hideErrormessage = false;
                     $scope.hideGraph = true;
                     $scope.hideGraphDetails = true;
-                    $scope.displayerrormessage = "Please select date and time before current date and time";
+                    $scope.displayerrormessage = "Please select date and time before current date and time.";
 
                 } else if(result.statusCode == 203) {
                     $scope.hideMonitoringDetails = true;
@@ -346,13 +338,13 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
 
                     $scope.sensorid = result.sensorid;
                     $scope.status = result.state;
-                    $scope.messgae = "Sensor is " + result.state.Name + ". Hence monitoring details is not available";
+                    $scope.messgae = "Sensor is " + result.state.Name + ". Please select a Sensor in running status.";
                 } else if(result.statusCode == 205) {
                     $scope.hideMonitoringDetails = true;
                     $scope.hideErrormessage = false;
                     $scope.hideGraph = true;
                     $scope.hideGraphDetails = true;
-                    $scope.displayerrormessage = "No data available for this date and time. Pease check after some time";
+                    $scope.displayerrormessage = "No data available for this date and time. Please check after some time.";
                 }
 
             })

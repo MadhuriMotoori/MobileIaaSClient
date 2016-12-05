@@ -2,9 +2,11 @@
 "use strict"
 app.controller('manageUserController',['$scope','$http','$state','$cookies',function ($scope,$http,$state,$cookies){
     $scope.hidemessage = true;
+    var host = $cookies.get('serverHost');
+    //var host = 'http://localhost:5000/';
     $scope.getUserDetails = function () {
         $http.post(
-            'http://localhost:5000/api/v1/getUserDetails',
+            host + 'api/v1/getUserDetails',
             {
                 'username' : $cookies.get('username')
             },
@@ -29,7 +31,7 @@ app.controller('manageUserController',['$scope','$http','$state','$cookies',func
 
     $scope.activate = function (username) {
         $http.post(
-            'http://localhost:5000/api/v1/activate',
+            host + 'api/v1/activate',
             {
                 'username' : username
             },
@@ -52,7 +54,7 @@ app.controller('manageUserController',['$scope','$http','$state','$cookies',func
 
     $scope.deactivate = function (username) {
         $http.post(
-            'http://localhost:5000/api/v1/deactivate',
+            host + 'api/v1/deactivate',
             {
                 'username' : username
             },
@@ -74,7 +76,7 @@ app.controller('manageUserController',['$scope','$http','$state','$cookies',func
 
     $scope.delete = function (username) {
         $http.post(
-            'http://localhost:5000/api/v1/deleteuser',
+            host + 'api/v1/deleteuser',
             {
                 'username' : username
             },
