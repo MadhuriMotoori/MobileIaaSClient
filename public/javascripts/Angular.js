@@ -134,7 +134,7 @@
                     },
                     'main@':{
                         templateUrl: 'monitor.ejs',
-                        controller : 'managementController'
+                        controller : 'monitorController'
                     }
                 },
                 params: { test: "default value" }

@@ -1,5 +1,5 @@
 <!-- page content -->
-<div class="right_col" role="main" ng-init="getUserSensorDetails()">
+<div class="right_col" role="main" ng-init="getUserSensorDetailsMonitor()">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -35,10 +35,10 @@
                                     <input type="radio" id="check-all" class="flat">
                                 </th>
                                 <th class="column-title">Id</th>
-                                <th class="column-title">SensorCluster </th>
-                                <th class="column-title">SensorId </th>
-                                <th class="column-title">SensorType </th>
-                                <th class="column-title">Status </th>
+                                <th class="column-title">Sensor Cluster </th>
+                                <th class="column-title">Sensor Id </th>
+                                <th class="column-title">Sensor Type </th>
+                                <th class="column-title">Status</th>
                             </tr>
                             </thead>
 
@@ -47,7 +47,7 @@
                                 <td class="a-center " ng-click="monitorSensor(sensor)">
                                     <input type="radio" class="flat" name="table_records">
                                 </td>
-                                <td class=" ">{{sensor.id}}</td>
+                                <td class=" ">{{$index + 1}}</td>
                                 <td class=" ">{{sensor.SensorHubName}}</td>
                                 <td class=" ">{{sensor.SensorId}}</td>
                                 <td class=" ">{{sensor.SensorType}}</td>
