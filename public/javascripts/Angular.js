@@ -2,268 +2,286 @@
  * Created by akash on 8/14/16.
  */
 "use strict"
- var app = angular.module('spa',['chart.js','ui.router','ui.bootstrap','ngCookies', 'ngStorage']);
-    app.config(function($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise('/');
+var app = angular.module('spa',['chart.js','ui.router','ui.bootstrap','ngCookies', 'ngStorage']);
+app.config(function($stateProvider, $urlRouterProvider){
+    $urlRouterProvider.otherwise('/');
 
-        $stateProvider
-            .state('login', {
-                url: '/',
-                views: {
-                    'main@':{
-                        templateUrl: 'login.ejs',
-                        controller:'logincontroller'
-                    }
+    $stateProvider
+        .state('login', {
+            url: '/',
+            views: {
+                'main@':{
+                    templateUrl: 'login.ejs',
+                    controller:'logincontroller'
                 }
+            }
 
-            })
-            .state('admin', {
-                url: "/admin",
-                views:{
-                    'main@':{
-                        templateUrl: 'adminlogin.ejs',
-                        controller:'admincontroller'
-                    }
+        })
+        .state('admin', {
+            url: "/admin",
+            views:{
+                'main@':{
+                    templateUrl: 'adminlogin.ejs',
+                    controller:'admincontroller'
                 }
-            })
-            .state('signup', {
-                url: "/signup",
-                views:{
-                    'main@':{
-                        templateUrl: 'signup.ejs',
-                        controller:'signupcontroller'
-                    }
+            }
+        })
+        .state('signup', {
+            url: "/signup",
+            views:{
+                'main@':{
+                    templateUrl: 'signup.ejs',
+                    controller:'signupcontroller'
                 }
-            })
-            .state('profile', {
-                url: "/profile",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'sidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'profile.ejs',
-                        controller : 'profilecontroller'
-                    }
+            }
+        })
+        .state('profile', {
+            url: "/profile",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('adminprofile', {
-                url: "/adminprofile",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'adminsidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'adminprofile.ejs',
-                        controller : 'adminprofilecontroller'
-                    }
+                'sidemenu@':{
+                    templateUrl: 'sidebarView.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('createSensorHub', {
-                url: "/createsensorhub",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'sidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'createSensorHubForm.ejs',
-                        controller : 'createsensorhubcontroller'
-                    }
+                'main@':{
+                    templateUrl: 'profile.ejs',
+                    controller : 'profilecontroller'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('adminprofile', {
+            url: "/adminprofile",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('createSensor', {
-                url: "/createsensor",
-                views:{
-                    'sidemenu@':{
-                        templateUrl: 'sidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'createSensorForm.ejs',
-                        controller : 'createsensorcontroller'
-                    }
+                'sidemenu@':{
+                    templateUrl: 'adminsidebarView.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('sensorManagement', {
-                url: "/sensorManagement",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'sidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'management.ejs',
-                        controller : 'managementController'
-                    }
+                'main@':{
+                    templateUrl: 'adminprofile.ejs',
+                    controller : 'adminprofilecontroller'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('createSensorHub', {
+            url: "/createsensorhub",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('monitor', {
-                url: "/monitor",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'sidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'monitor.ejs',
-                        controller : 'monitorController'
-                    }
+                'sidemenu@':{
+                    templateUrl: 'sidebarView.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('autoscaling', {
-                url: "/autoscaling",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'sidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'autoscaling.ejs',
-                        controller : 'managementController'
-                    }
+                'main@':{
+                    templateUrl: 'createSensorHubForm.ejs',
+                    controller : 'createsensorhubcontroller'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('createSensor', {
+            url: "/createsensor",
+            views:{
+                'sidemenu@':{
+                    templateUrl: 'sidebarView.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('viewSensorsInfo', {
-                url: "/sensorsInfo",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'sidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'sensorInfo.ejs',
-                        controller : 'viewSensorInfoController'
-                    }
+                'main@':{
+                    templateUrl: 'createSensorForm.ejs',
+                    controller : 'createsensorcontroller'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('sensorManagement', {
+            url: "/sensorManagement",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('deleteSensor', {
-                url: "/deleteSensor",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'adminsidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'deleteSensor.ejs',
-                        controller : 'deleteSensorController'
-                    }
+                'sidemenu@':{
+                    templateUrl: 'sidebarView.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('manageUser', {
-                url: "/manageUser",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'adminsidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'manageUser.ejs',
-                        controller : 'manageUserController'
-                    }
+                'main@':{
+                    templateUrl: 'management.ejs',
+                    controller : 'managementController'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('monitor', {
+            url: "/monitor",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('editSensor', {
-                url: "/editSensor",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'adminsidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'editSensor.ejs',
-                        controller : 'editSensorController'
-                    }
+                'sidemenu@':{
+                    templateUrl: 'sidebarView.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('addSensor', {
-                url: "/addSensor",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'adminsidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'AddSensor.ejs',
-                        controller : 'addSensorController'
-                    }
+                'main@':{
+                    templateUrl: 'monitor.ejs',
+                    controller : 'monitorController'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('autoscaling', {
+            url: "/autoscaling",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            })
-            .state('viewSensorData', {
-                url: "/sensorData",
-                views:{
-                    'navbar@':{
-                        templateUrl: 'navbar.ejs',
-                        controller: 'navBarController'
-                    },
-                    'sidemenu@':{
-                        templateUrl: 'sidebarView.ejs',
-                        controller: 'navBarController'
-                    },
-                    'main@':{
-                        templateUrl: 'viewSensorData.ejs',
-                        controller : 'managementController'
-                    }
+                'sidemenu@':{
+                    templateUrl: 'sidebarView.ejs',
+                    controller: 'navBarController'
                 },
-                params: { test: "default value" }
-            });
+                'main@':{
+                    templateUrl: 'autoscaling.ejs',
+                    controller : 'managementController'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('viewSensorsInfo', {
+            url: "/sensorsInfo",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
+                },
+                'sidemenu@':{
+                    templateUrl: 'sidebarView.ejs',
+                    controller: 'navBarController'
+                },
+                'main@':{
+                    templateUrl: 'sensorInfo.ejs',
+                    controller : 'viewSensorInfoController'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('deleteSensor', {
+            url: "/deleteSensor",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
+                },
+                'sidemenu@':{
+                    templateUrl: 'adminsidebarView.ejs',
+                    controller: 'navBarController'
+                },
+                'main@':{
+                    templateUrl: 'deleteSensor.ejs',
+                    controller : 'deleteSensorController'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('manageUser', {
+            url: "/manageUser",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
+                },
+                'sidemenu@':{
+                    templateUrl: 'adminsidebarView.ejs',
+                    controller: 'navBarController'
+                },
+                'main@':{
+                    templateUrl: 'manageUser.ejs',
+                    controller : 'manageUserController'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('editSensor', {
+            url: "/editSensor",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
+                },
+                'sidemenu@':{
+                    templateUrl: 'adminsidebarView.ejs',
+                    controller: 'navBarController'
+                },
+                'main@':{
+                    templateUrl: 'editSensor.ejs',
+                    controller : 'editSensorController'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('addSensor', {
+            url: "/addSensor",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
+                },
+                'sidemenu@':{
+                    templateUrl: 'adminsidebarView.ejs',
+                    controller: 'navBarController'
+                },
+                'main@':{
+                    templateUrl: 'AddSensor.ejs',
+                    controller : 'addSensorController'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('viewSensorData', {
+            url: "/sensorData",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
+                },
+                'sidemenu@':{
+                    templateUrl: 'sidebarView.ejs',
+                    controller: 'navBarController'
+                },
+                'main@':{
+                    templateUrl: 'viewSensorData.ejs',
+                    controller : 'managementController'
+                }
+            },
+            params: { test: "default value" }
+        })
+        .state('billing', {
+            url: "/billing",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
+                },
+                'sidemenu@':{
+                    templateUrl: 'sidebarView.ejs',
+                    controller: 'navBarController'
+                },
+                'main@':{
+                    templateUrl: 'billing.ejs',
+                    controller : 'billingController'
+                }
+            },
+            params: { test: "default value" }
+        });
 
-    });
+});
