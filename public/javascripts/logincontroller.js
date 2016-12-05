@@ -1,9 +1,10 @@
 
 "use strict"
   app.controller('logincontroller',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies){
-     //var host = 'http://localhost:5000/';
-      var host = 'http://ec2-54-202-217-166.us-west-2.compute.amazonaws.com:5000/';
+      var host = 'http://localhost:5000/';
+      //var host = 'http://ec2-54-202-217-166.us-west-2.compute.amazonaws.com:5000/';
       $scope.hideMessage = true;
+
       $scope.signIn = function(){
       $http.post(
                 host + 'api/v1/validate',

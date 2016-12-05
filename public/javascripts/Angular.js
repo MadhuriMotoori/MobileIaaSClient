@@ -229,6 +229,24 @@
                 },
                 params: { test: "default value" }
             })
+            .state('addSensor', {
+                url: "/addSensor",
+                views:{
+                    'navbar@':{
+                        templateUrl: 'navbar.ejs',
+                        controller: 'navBarController'
+                    },
+                    'sidemenu@':{
+                        templateUrl: 'adminsidebarView.ejs',
+                        controller: 'navBarController'
+                    },
+                    'main@':{
+                        templateUrl: 'AddSensor.ejs',
+                        controller : 'addSensorController'
+                    }
+                },
+                params: { test: "default value" }
+            })
             .state('viewSensorData', {
                 url: "/sensorData",
                 views:{

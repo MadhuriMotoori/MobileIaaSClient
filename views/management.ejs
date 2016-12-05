@@ -32,7 +32,7 @@
                             <thead>
                             <tr class="headings">
                                 <th>
-                                    <input type="checkbox" id="check-all" class="flat">
+                                    <input type="radio" id="check-all" class="flat">
                                 </th>
                                 <th class="column-title">Id</th>
                                 <th class="column-title">SensorCluster </th>
@@ -45,7 +45,7 @@
                             <tbody>
                             <tr class="even pointer" ng-repeat="sensor in sensorlist">
                                 <td class="a-center " ng-click="manageSensor(sensor)">
-                                    <input type="checkbox" class="flat" name="table_records">
+                                    <input type="radio" class="flat" name="table_records">
                                 </td>
                                 <td class=" ">{{sensor.id}}</td>
                                 <td class=" ">{{sensor.SensorHubName}}</td>
