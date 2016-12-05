@@ -71,6 +71,27 @@ exports.listsensors = function(req, res){
     }, getSensorList);
 };
 
+
+exports.listsensorTypeRegion = function(req, res){
+    var username = req.body.username;
+    var sensorhubname = req.body.hubname;
+    var sensorType = req.body.sensortype;
+    var getSensorList = "select Region from sensor where UserName = '" + username + "' and SensorHubName = '" + sensorhubname + "' " +
+        "and SensorType ='" + sensorType + "'and Status != 'terminated';";
+    var sensorlist = {};
+    mysql.fetchData(function(err, results) {
+        if (err) {
+            throw err;
+        } else {
+            if (results != null) {
+                sensorTypeRegions = results;
+            }
+            var json_response={"statusCode":200,"sensorRegions":sensorTypeRegions};
+            res.send(json_response);
+        }
+    }, getSensorList);
+};
+
 exports.listSensorsInstances = function(req, res){
 
     var username = req.body.username;

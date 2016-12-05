@@ -91,6 +91,7 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
                 {
                     sensorhubname: $scope.hubname,
                     sensorType: $scope.sensorType,
+                    region: $scope.sensorRegion,
                     imageId: $scope.imageId,
                     username: $cookies.get('username'),
                     count: $scope.minimumCount - $scope.sensorTypeCount
@@ -172,6 +173,27 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
 
         });
     };
+
+    $scope.listsensorTypeRegion = function () {
+        $http({
+            method : "POST",
+            url : '/listsensorTypeRegion',
+            data : {
+                "hubname" : $scope.hubname,
+                "username" : $cookies.get('username'),
+                "sensortype" : $scope.sensorType
+            }
+        }).success(function(data) {
+            // checking the response data for statusCode
+            console.log(JSON.stringify(data));
+            if (data.statusCode == 200) {
+                $scope.sensorRegions = data.sensorRegions;
+            }
+        }).error(function(error) {
+
+        });
+    };
+
 
     /*
      $scope.getSensorInstances = function () {

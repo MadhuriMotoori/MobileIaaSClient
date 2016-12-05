@@ -34,6 +34,7 @@ app.use('/users', users);
 
 app.post('/listuserSensorDetails', main.listuserSensorDetails);
 app.post('/getSensorTypeCount', main.getSensorTypeCount);
+app.post('/listsensorTypeRegion', main.listsensorTypeRegion);
 app.post('/listsensorhub',main.listsensorhub);
 app.post('/listsensors',main.listsensors);
 app.post('/listSensorInstances', main.listSensorsInstances);

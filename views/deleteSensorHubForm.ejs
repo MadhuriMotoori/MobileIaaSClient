@@ -1,10 +1,10 @@
 <!-- page content -->
-<div class="right_col" role="main" ng-init="getSensorTypeDetails()">
+<div class="right_col" role="main" ng-init="getSensorHubDetails()">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Add Sensors to Sensor Hub</h2>
+                    <h2>Delete Sensors from Sensor Hub</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -26,36 +26,36 @@
                     <br />
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Sensor Type <span class="required">*</span></label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Sensor Hub <span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select  id="sensorTypeRegion" name="sensorTypeRegion" class="select2_group form-control" ng-model="sensorTypeRegion" ng-options="name.dropdownInfo as name.dropdownInfo for name in sensorList">
+                                <select  id="sensorTypeRegion" name="sensorHub" class="select2_group form-control" ng-model="sensorHub" ng-options="name.SensorHubName as name.SensorHubName for name in sensorHubs">
                                 </select>
                             </div>
                         </div>
 
 
-<!--                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sensorType">Sensor Type <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select id="sensorType" name="sensorType" class="form-control col-md-7 col-xs-12" ng-model="sensorType">
-                                    <option value="Temperature Sensor">Temperature Sensor</option>
-                                    <option value="Pressure Sensor">Pressure Sensor</option>
-                                    <option value="Salinity Sensor">Salinity Sensor</option>
-                                    <option value="Oxygen Sensor">Oxygen Sensor</option>
-                                </select>
-                            </div>
-                        </div>-->
-<!--                        <div class="form-group">
-                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Region</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
-                            </div>
-                        </div>-->
+                        <!--                        <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sensorType">Sensor Type <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <select id="sensorType" name="sensorType" class="form-control col-md-7 col-xs-12" ng-model="sensorType">
+                                                            <option value="Temperature Sensor">Temperature Sensor</option>
+                                                            <option value="Pressure Sensor">Pressure Sensor</option>
+                                                            <option value="Salinity Sensor">Salinity Sensor</option>
+                                                            <option value="Oxygen Sensor">Oxygen Sensor</option>
+                                                        </select>
+                                                    </div>
+                                                </div>-->
+                        <!--                        <div class="form-group">
+                                                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Region</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                                                    </div>
+                                                </div>-->
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <button type="submit" class="btn btn-success" id="addsensor" name="addsensor" ng-click="addSensor()">Add Sensor</button>
+                                <button type="submit" class="btn btn-success" id="viewSensorHub" name="viewSensorHub" ng-click="viewSensorHubDetails()">View SensorHub Details</button>
                             </div>
                         </div>
 
@@ -63,10 +63,12 @@
                 </div>
             </div>
         </div>
+
+
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Sensor Types Info</h2>
+                    <h2>View Selected SensorHub Info </h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -84,35 +86,42 @@
                     </ul>
                     <div class="clearfix"></div>
                 </div>
+
                 <div class="x_content">
 
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Sensor Type</th>
-                            <th>Region</th>
-                            <th>Total</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="sensor in sensorList">
-                            <th scope="row">{{sensor.id}}</th>
-                            <td>{{sensor.type}}</td>
-                            <td>{{sensor.region}}</td>
-                            <td >{{sensor.count}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
 
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                            <tr class="headings">
+                                <th class="column-title">SensorCluster </th>
+                                <th class="column-title">SensorId </th>
+                                <th class="column-title">SensorType </th>
+                                <th class="column-title">Region </th>
+                                <th class="column-title">Status </th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr class="even pointer" ng-repeat="sensor in sensorlist">
+                                <td class=" ">{{sensor.SensorHubName}}</td>
+                                <td class=" ">{{sensor.SensorId}}</td>
+                                <td class=" ">{{sensor.SensorType}}</td>
+                                <td class=" ">{{sensor.Region}}</td>
+                                <td class=" ">{{sensor.Status}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
 
+
         <div class="col-md-12 col-sm-12 col-xs-12" >
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Create Sensor Hub</h2>
+                    <h2>Delete Sensor Hub</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -138,25 +147,25 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sensorhubname">Sensor Hub Name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="sensorhubname" name="sensorhubname" ng-model="sensorhubname" type="text"
-                                       placeholder="Sensor Hub Name" class="form-control col-md-7 col-xs-12" required="required">
+                                <input id="sensorhubname" name="sensorhubname"  type="text"
+                                        class="form-control col-md-7 col-xs-12" value={{sensorHub}} readonly>
                             </div>
                         </div>
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <button type="submit" class="btn btn-success" id="addsensorhub" name="addsensorhub" ng-click="addSensorHub()">Create Sensor Hub</button>
+                                <button type="submit" class="btn btn-success" id="deletesensorhub" name="deletesensorhub" ng-click="deleteSensorHub()">Delete Sensor Hub</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-         </div>
+        </div>
 
         <div class="col-md-12 col-sm-12 col-xs-12" ng-hide="resultsDetails">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Created Sensor Details</h2>
+                    <h2>Deleted Sensor Hub Details</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -180,12 +189,10 @@
                         <table class="table table-striped jambo_table bulk_action">
                             <thead>
                             <tr class="headings">
-                                <th class="column-title"># </th>
-                                <th class="column-title">Sensor Cluster</th>
-                                <th class="column-title">Sensor Type </th>
+                                <th class="column-title">SensorCluster </th>
+                                <th class="column-title">SensorId </th>
+                                <th class="column-title">SensorType </th>
                                 <th class="column-title">Region </th>
-                                <th class="column-title">Sensor Id </th>
-
                                 <th class="bulk-actions" colspan="7">
                                     <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                                 </th>
@@ -193,12 +200,11 @@
                             </thead>
 
                             <tbody>
-                            <tr class="odd pointer" ng-repeat="sensor in createdSensors">
-                                <td class=" ">{{sensor.index}}</td>
-                                <td class=" ">{{sensor.sensorhubname}}</td>
+                            <tr class="odd pointer" ng-repeat="sensor in deletedSensorlist">
+                                <td class=" ">{{sensor.SensorHubName}}</td>
+                                <td class=" ">{{sensor.SensorId}}</td>
                                 <td class=" ">{{sensor.SensorType}}</td>
                                 <td class=" ">{{sensor.Region}}</td>
-                                <td class=" ">{{sensor.SensorId}}</td>
                             </tr>
                             </tbody>
                         </table>
