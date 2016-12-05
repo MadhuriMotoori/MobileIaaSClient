@@ -106,7 +106,7 @@
         $scope.user_pending_sensorcount = function () {
 
             $http.post(
-                'http://localhost:5000/api/v1/pendingsensorsbyaccount',
+                'http://localhost:5000/api/v1/stoppedsensorsbyaccount',
                 {
                     username: $cookies.get('username')
                 },
@@ -114,8 +114,8 @@
             )
                 .success(function (data) {
                     if (data.statusCode == 200) {
-                        $scope.pendingsensorscount = data.pendingsensors;
-                        $scope.pendingsensorlist = data.result;
+                        $scope.stoppedsensorscount = data.stoppedsensors;
+                        $scope.stoppedsensorlist = data.result;
 
                     }
                     else {

@@ -33,7 +33,7 @@
             $scope.sensors_per_cluster();
         };
         
-        $interval(updatedashboard, 5000, 1);
+        $interval(updatedashboard, 5*60000);
         
         $scope.total_users = function(){
             $http.get('http://localhost:5000/api/v1/totalusers')
@@ -114,12 +114,12 @@
         $scope.pending_sensorcount = function () {
 
             $http.get(
-                'http://localhost:5000/api/v1/pendingsensors'
+                'http://localhost:5000/api/v1/stoppedsensors'
             )
                 .success(function (data) {
                     if (data.statusCode == 200) {
-                        $scope.pendingsensorscount = data.pendingsensors;
-                        $scope.pendingsensorlist = data.result;
+                        $scope.stoppedsensorscount = data.stoppedsensors;
+                        $scope.stoppedsensorlist = data.result;
 
                     }
                     else {

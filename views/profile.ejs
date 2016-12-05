@@ -15,8 +15,8 @@
             <div class="count blue">{{activesensors}}</div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-pause-circle-o"></i> Paused Sensors</span>
-            <div class="count blue">{{pendingsensorscount}}</div>
+            <span class="count_top"><i class="fa fa-pause-circle-o"></i> Stopped Sensors</span>
+            <div class="count blue">{{stoppedsensorscount}}</div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-times"></i> Terminated Sensors</span>
@@ -132,7 +132,7 @@
         <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="x_panel tile">
                 <div class="x_title">
-                    <h2>Paused Sensor Details</h2>
+                    <h2>Stopped Sensor Details</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link">Manage <i class="fa fa-wrench"></i></a></li>
                     </ul>
@@ -142,8 +142,8 @@
 
 
                 <div class="x_content">
-                    <p ng-show="!pendingsensorlist.length" style="text-align: center">No Paused sensors</p>
-                    <div class="table-responsive" ng-show="pendingsensorlist.length">
+                    <p ng-show="!stoppedsensorlist.length" style="text-align: center">No Stopped sensors</p>
+                    <div class="table-responsive" ng-show="stoppedsensorlist.length">
                         <table class="table table-striped jambo_table bulk_action">
                             <thead>
                                 <tr class="headings">
@@ -154,10 +154,10 @@
                             </thead>
 
                             <tbody>
-                                <tr class="even pointer" ng-repeat="pendingsensor in pendingsensorlist">
-                                    <td class=" ">{{pendingsensor.clustername}}</td>
-                                    <td class=" ">{{pendingsensor.sensorid}}</td>
-                                    <td class=" ">{{pendingsensor.type}}</td>
+                                <tr class="even pointer" ng-repeat="stoppedsensor in stoppedsensorlist">
+                                    <td class=" ">{{stoppedsensor.clustername}}</td>
+                                    <td class=" ">{{stoppedsensor.sensorid}}</td>
+                                    <td class=" ">{{stoppedsensor.type}}</td>
                                 </tr>
                             </tbody>
                         </table>
