@@ -41,6 +41,7 @@ app.post('/listSensorInstances', main.listSensorsInstances);
 app.post('/getSensorData',main.getSensorData);
 app.post('/billing',main.getAllSensorHubBilling);
 app.post('/sensorBilling',main.getIndividualSensorHubBilling);
+app.post('/getTotalRevenue',main.getTotalRevenue);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
