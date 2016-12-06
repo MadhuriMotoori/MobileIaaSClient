@@ -1,7 +1,7 @@
 
 "use strict"
   app.controller('profilecontroller',['$scope','$http','$state','$cookies', '$interval',function ($scope, $http, $state, $cookies, $interval){
-
+      var host = $cookies.get('serverHost');
     if($cookies.get('username') ==undefined || $cookies.get('username') =='' || $cookies.get('username') == null){
         //$state.go('admin')
 
@@ -57,7 +57,7 @@
 
         $scope.user_cluster_count = function(){
             $http.post(
-                    'http://localhost:5000/api/v1/totalclusterbyaccount',
+                    host + 'api/v1/totalclusterbyaccount',
                     {
                         username: $cookies.get('username')
                     },
@@ -81,7 +81,7 @@
         $scope.user_active_sensorcount = function () {
 
             $http.post(
-                'http://localhost:5000/api/v1/activesensorsbyaccount',
+                host + 'api/v1/activesensorsbyaccount',
                 {
                     username: $cookies.get('username')
                 },
@@ -106,7 +106,7 @@
         $scope.user_pending_sensorcount = function () {
 
             $http.post(
-                'http://localhost:5000/api/v1/stoppedsensorsbyaccount',
+                host + 'api/v1/stoppedsensorsbyaccount',
                 {
                     username: $cookies.get('username')
                 },
@@ -129,7 +129,7 @@
         $scope.user_terminated_sensorcount = function () {
 
             $http.post(
-                'http://localhost:5000/api/v1/terminatedsensorsbyaccount',
+                host + 'api/v1/terminatedsensorsbyaccount',
                 {
                     username: $cookies.get('username')
                 },
@@ -150,7 +150,7 @@
 
         $scope.user_sensor_typecount = function () {
             $http.post(
-                'http://localhost:5000/api/v1/typecountbyaccount',
+                host + 'api/v1/typecountbyaccount',
                 {
                     username: $cookies.get('username')
                 },
@@ -171,7 +171,7 @@
 
         $scope.user_sensor_per_cluster = function () {
             $http.post(
-                'http://localhost:5000/api/v1/sensorperclusterbyaccount',
+                host + 'api/v1/sensorperclusterbyaccount',
                 {
                     username: $cookies.get('username')
                 },
