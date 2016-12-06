@@ -35,7 +35,7 @@
 
         $scope.user_sensors_count = function(){
             $http.post(
-                'http://localhost:5000/api/v1/totalsensorsbyaccount',
+                host + 'api/v1/totalsensorsbyaccount',
                 {
                     username: $cookies.get('username')
                 },
