@@ -196,3 +196,22 @@ exports.getIndividualSensorHubBilling = function(req, res){
         }
     }, getSensorInstancesList);
 };
+
+exports.getTotalRevenue = function(req, res){
+    var getTotalRevenue = "SELECT SUM(SD.ChargePerHour*S.ActiveHours) AS Charges FROM `infraSense-dev`.sensor S JOIN `infraSense-dev`.sensordetails SD ON SD.SensorType = S.SensorType;";
+    console.log(getTotalRevenue);
+    mysql.fetchData(function(err, results) {
+        if (err) {
+            throw err;
+        } else  {
+            if (results.length > 0) {
+                console.log("revenue::"+results[0].Charges);
+                var json_response={"statusCode":200,"totalRevenue":results[0].Charges};
+                res.send(json_response);
+
+            }else{
+                console.log("came-----------------------");
+            }
+        }
+    }, getTotalRevenue);
+};
