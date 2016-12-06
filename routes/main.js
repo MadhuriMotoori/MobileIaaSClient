@@ -118,7 +118,7 @@ exports.getSensorData = function(req,res){
     var username = req.body.username;
     var sensorId = req.body.sensorid;
     var startDate = req.body.startDate;
-    var getSensorData = "select * from sensorData where sensorId = '" + sensorId + "';";
+    var getSensorData = "select * from sensordata where sensorId = '" + sensorId + "';";
     console.log(getSensorData);
     var sensorData = {};
     mysql.fetchData(function(err, results) {
@@ -198,11 +198,12 @@ exports.getIndividualSensorHubBilling = function(req, res){
 };
 
 exports.getTotalRevenue = function(req, res){
-    var getTotalRevenue = "SELECT SUM(SD.ChargePerHour*S.ActiveHours) AS Charges FROM `infraSense-dev`.sensor S JOIN `infraSense-dev`.sensordetails SD ON SD.SensorType = S.SensorType;";
+    var getTotalRevenue = "SELECT SUM(SD.ChargePerHour*S.ActiveHours) AS Charges FROM sensor S JOIN sensordetails SD ON SD.SensorType = S.SensorType;";
     console.log(getTotalRevenue);
     mysql.fetchData(function(err, results) {
         if (err) {
             throw err;
+            
         } else  {
             if (results.length > 0) {
                 console.log("revenue::"+results[0].Charges);
