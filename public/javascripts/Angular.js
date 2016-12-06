@@ -328,5 +328,23 @@ app.config(function($stateProvider, $urlRouterProvider){
                 }
             },
             params: { test: "default value" }
+        })
+        .state('monitorCluster', {
+            url: "/monitorCluster",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
+                },
+                'sidemenu@':{
+                    templateUrl: 'sidebarView.ejs',
+                    controller: 'navBarController'
+                },
+                'main@':{
+                    templateUrl: 'monitorCluster.ejs',
+                    controller : 'monitorController'
+                }
+            },
+            params: { test: "default value" }
         });
 });

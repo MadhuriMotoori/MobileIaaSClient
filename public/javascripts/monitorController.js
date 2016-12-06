@@ -11,6 +11,8 @@ app.controller('monitorController',['$scope','$http','$state','$cookies',functio
     $scope.hideGraphDetails = true;
     $scope.hideData =true;
 
+    $scope.hideClusterMonitor = true;
+
     $scope.getUserSensorDetailsMonitor = function () {
         $http.post(
             host + 'api/v1/getSensorDetailsMonitor',
@@ -31,6 +33,63 @@ app.controller('monitorController',['$scope','$http','$state','$cookies',functio
                 console.log('error')
             })
     };
+
+    $scope.getUserSensorDetailsMonitorCluster = function () {
+        $http.post(
+            host + 'api/v1/getSensorDetailsMonitorCluster',
+            {
+                'username' : $cookies.get('username')
+            },
+            { cors: true }
+        )
+            .success(function(data){
+
+                var result = JSON.parse(JSON.stringify(data));
+                if(result.statusCode == 200) {
+                    console.log(result.clusterInfo)
+                    $scope.sensorlist = result.clusterInfo;
+                }
+            })
+            .error(function(error){
+                console.log('error')
+            })
+    };
+
+    $scope.monitorCluster = function (sensorHubName) {
+        $http.post(
+            host + 'api/v1/getClusterSensorDetails',
+            {
+                'username' : $cookies.get('username'),
+                'sensorhubname' : sensorHubName
+            },
+            { cors: true }
+        )
+            .success(function(data){
+
+                var result = JSON.parse(JSON.stringify(data));
+                if(result.statusCode == 200) {
+                    $scope.hideClusterMonitor = false;
+                    $scope.clusterInfo = result.clusterInfo;
+                    var res = result.clusterInfo;
+                    $scope.data = [];
+                    $scope.labels = [];
+                    $scope.series = [];
+                    for(var i = 0; i < res.length; i++) {
+                        var obj = res[i];
+                        console.log('Entered' + obj.ActiveHours + obj.SensorId);
+                        $scope.data.push(obj.ActiveHours);
+                        $scope.labels.push(obj.SensorId);
+                    }
+                    $scope.colours = ["#C24642","#369EAD"];
+                    $scope.series = ['Active Hours'];
+                }
+            })
+            .error(function(error){
+                console.log('error')
+            })
+
+    };
+
 
     $scope.monitorSensor = function (sensorInfo) {
         $scope.selectedSensor = sensorInfo;
