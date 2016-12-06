@@ -1,8 +1,8 @@
 
 "use strict"
 app.controller('admincontroller',['$scope','$http','$state','$cookies',function ($scope,$http,$state,$cookies){
-    var host = $cookies.get('serverHost');
-    //var host = 'http://localhost:5000/';
+    
+    var host = 'http://localhost:5000/';
 
     $scope.adminValidate = function(){
         $http.post(
@@ -18,6 +18,8 @@ app.controller('admincontroller',['$scope','$http','$state','$cookies',function 
                 if(data.statusCode == 200)
                 {
                     $cookies.put('username',$scope.username);
+                    $cookies.put('serverHost',host);
+                    $cookies.put('isadmin','admin');
                     $state.go('adminprofile',{'test':data.username});
                 }
                 else

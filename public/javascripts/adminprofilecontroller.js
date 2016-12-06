@@ -1,7 +1,7 @@
 
 "use strict"
   app.controller('adminprofilecontroller',['$scope','$http','$state','$cookies', '$interval',function ($scope, $http, $state, $cookies, $interval){
-
+      var host = $cookies.get('serverHost');
     if($cookies.get('username') ==undefined || $cookies.get('username') =='' || $cookies.get('username') == null){
         //$state.go('admin')
 
@@ -33,7 +33,7 @@
             $scope.sensors_per_cluster();
         };
         
-        $interval(updatedashboard,1000,1);
+        $interval(updatedashboard,1000,2);
         
         $scope.total_users = function(){
             $http.get('http://localhost:5000/api/v1/totalusers')
@@ -72,7 +72,7 @@
 
         $scope.cluster_count = function(){
             $http.get(
-                    'http://localhost:5000/api/v1/totalclusters'
+                    host+ 'api/v1/totalclusters'
 
                 )
                     .success(function(data){
@@ -93,7 +93,7 @@
         $scope.active_sensorcount = function () {
 
             $http.get(
-                'http://localhost:5000/api/v1/activesensors'
+                host+ 'api/v1/activesensors'
             )
                 .success(function(data){
                     if(data.statusCode == 200)
@@ -114,7 +114,7 @@
         $scope.pending_sensorcount = function () {
 
             $http.get(
-                'http://localhost:5000/api/v1/stoppedsensors'
+                host+ 'api/v1/stoppedsensors'
             )
                 .success(function (data) {
                     if (data.statusCode == 200) {
@@ -133,7 +133,7 @@
         $scope.terminated_sensorcount = function () {
 
             $http.get(
-                'http://localhost:5000/api/v1/terminatedsensors'
+                host+ 'api/v1/terminatedsensors'
 
             )
                 .success(function (data) {
@@ -151,7 +151,7 @@
 
         $scope.sensor_typecount = function () {
             $http.get(
-                'http://localhost:5000/api/v1/typecount'
+                host+ 'api/v1/typecount'
 
             )
                 .success(function (data) {
@@ -169,7 +169,7 @@
 
         $scope.sensors_per_cluster = function(){
             $http.get(
-                'http://localhost:5000/api/v1/sensorspercluster'
+                host+ 'api/v1/sensorspercluster'
 
             )
                 .success(function (data) {
