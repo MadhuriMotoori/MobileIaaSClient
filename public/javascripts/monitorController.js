@@ -1,9 +1,8 @@
 "use strict"
 app.controller('monitorController',['$scope','$http','$state','$cookies',function ($scope, $http, $state, $cookies) {
-    //var host = $cookies.get('serverHost');
-    var host = 'http://localhost:5000/';
-    //$scope.imageId = "ami-c074d7a0";
-    //$scope.imageId = "ami-5ee7443e";
+    var host = $cookies.get('serverHost');
+    //var host = 'http://localhost:5000/';
+
     $scope.hideSensorManager = true;
     $scope.hideMonitoringDetails = true;
     $scope.hideGraph = true;
