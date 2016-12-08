@@ -8,10 +8,10 @@ var envs = require('envs');
 
 function getConnection() {
     var connection = mysql.createConnection({
-        host: envs('dbhost'), //host where mysql server is running
-        user: envs('dbuser'), //user for the mysql application
-        password: envs('dbpassword'), //password for the mysql application
-        database: envs('dbdatabase'), //database name
+        host: 'localhost',//envs('dbhost'), //host where mysql server is running
+        user: 'root', //envs('dbuser'), //user for the mysql application
+        password: 'root',//envs('dbpassword'), //password for the mysql application
+        database: 'infraSense-dev',//envs('dbdatabase'), //database name
         port: 3306 //port, it is 3306 by default for mysql
     });
     return connection;
