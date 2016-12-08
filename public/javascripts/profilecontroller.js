@@ -29,6 +29,8 @@
             $scope.user_terminated_sensorcount();
             $scope.user_sensor_per_cluster();
             $scope.user_sensor_typecount();
+            $scope.user_total_bill();
+            $scope.user_per_cluster_billing();
         };
 
         $interval(updatedashboard, 1000,1);
@@ -50,6 +52,26 @@
                     {
                     }
                 })
+                .error(function(error){
+                    console.log('error')
+                })
+        }
+
+        $scope.user_total_bill  = function(){
+            $http.post(
+                '/billing',
+                {
+                    username:$cookies.get('username')
+                }
+            ).success(function(data){
+                if(data.statusCode == 200)
+                {
+                    $scope.totalCost = data.totalCost;
+                }
+                else
+                {
+                }
+            })
                 .error(function(error){
                     console.log('error')
                 })
@@ -160,6 +182,27 @@
                     if (data.statusCode == 200) {
                         $scope.sensorcount = data.count;
                         $scope.sensortypes = data.types;
+                    }
+                    else {
+                    }
+                })
+                .error(function (error) {
+                    console.log('error')
+                })
+        }
+        
+        $scope.user_per_cluster_billing = function(){
+            $http.post(
+              '/sensorBilling',
+                {
+                    username: $cookies.get('username')
+                }
+                
+            )
+                .success(function (data) {
+                    if (data.statusCode == 200) {
+                        $scope.clustercount = data.count;
+                        $scope.clusternames = data.clusters;
                     }
                     else {
                     }

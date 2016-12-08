@@ -76,7 +76,7 @@ exports.listsensorTypeRegion = function(req, res){
     var username = req.body.username;
     var sensorhubname = req.body.hubname;
     var sensorType = req.body.sensortype;
-    var getSensorList = "select Region from sensor where UserName = '" + username + "' and SensorHubName = '" + sensorhubname + "' " +
+    var getSensorList = "select distinct(Region) from sensor where UserName = '" + username + "' and SensorHubName = '" + sensorhubname + "' " +
         "and SensorType ='" + sensorType + "'and Status != 'terminated';";
     var sensorlist = {};
     mysql.fetchData(function(err, results) {

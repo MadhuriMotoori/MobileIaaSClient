@@ -31,12 +31,13 @@
             $scope.terminated_sensorcount();
             $scope.sensor_typecount();
             $scope.sensors_per_cluster();
+            $scope.total_revenue();
         };
         
         $interval(updatedashboard,1000,2);
         
         $scope.total_users = function(){
-            $http.get('http://localhost:5000/api/v1/totalusers')
+            $http.get(host+'api/v1/totalusers')
                 .success(function(data){
                     if(data.statusCode == 200)
                     {
@@ -53,7 +54,7 @@
 
         $scope.sensors_count = function(){
             $http.get(
-                'http://localhost:5000/api/v1/totalsensors'
+                host + 'api/v1/totalsensors'
 
             )
                 .success(function(data){
@@ -181,6 +182,23 @@
                     }
                 })
                 .error(function (error) {
+                    console.log('error')
+                })
+        }
+
+        $scope.total_revenue  = function(){
+            $http.get(
+                '/getTotalRevenue'
+            ).success(function(data){
+                if(data.statusCode == 200)
+                {
+                    $scope.totalRevenue = data.totalRevenue;
+                }
+                else
+                {
+                }
+            })
+                .error(function(error){
                     console.log('error')
                 })
         }
