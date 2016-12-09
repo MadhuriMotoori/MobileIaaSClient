@@ -19,6 +19,19 @@
             $state.go('login')
         }
 
+        //first call
+
+        $scope.initiate_admin_dashborad=function () {
+            $scope.total_users();
+            $scope.sensors_count()
+            $scope.cluster_count();
+            $scope.pending_sensorcount();
+            $scope.active_sensorcount();
+            $scope.terminated_sensorcount();
+            $scope.sensor_typecount();
+            $scope.sensors_per_cluster();
+            $scope.total_revenue();
+        }
 
 
         var updatedashboard = function() {
@@ -34,7 +47,8 @@
             $scope.total_revenue();
         };
         
-        $interval(updatedashboard,1000,2);
+
+        $interval(updatedashboard,3*60*1000);
         
         $scope.total_users = function(){
             $http.get(host+'api/v1/totalusers')

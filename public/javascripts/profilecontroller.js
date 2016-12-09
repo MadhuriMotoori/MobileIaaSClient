@@ -19,10 +19,22 @@
             $state.go('login')
         }
 
+        $scope.initiate_dashborad = function(){
+            $scope.user_sensors_count();
+            $scope.user_cluster_count();
+            $scope.user_pending_sensorcount();
+            $scope.user_active_sensorcount();
+            $scope.user_terminated_sensorcount();
+            $scope.user_sensor_per_cluster();
+            $scope.user_sensor_typecount();
+            $scope.user_total_bill();
+            $scope.user_per_cluster_billing();
+        }
+
         var updatedashboard = function() {
             console.log('Changing exampleText');
 
-            $scope.user_sensors_count()
+            $scope.user_sensors_count();
             $scope.user_cluster_count();
             $scope.user_pending_sensorcount();
             $scope.user_active_sensorcount();
@@ -33,7 +45,9 @@
             $scope.user_per_cluster_billing();
         };
 
-        $interval(updatedashboard, 1000,1);
+
+
+        $interval(updatedashboard,3*60*1000);
 
         $scope.user_sensors_count = function(){
             $http.post(
