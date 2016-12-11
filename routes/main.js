@@ -117,20 +117,34 @@ exports.listSensorsInstances = function(req, res){
 exports.getSensorData = function(req,res){
     var username = req.body.username;
     var sensorId = req.body.sensorid;
-    var startDate = req.body.startDate;
-    var getSensorData = "select * from sensordata where sensorId = '" + sensorId + "';";
-    console.log(getSensorData);
+    var sDate = new Date(req.body.startDate);
+    var eDate = new Date(req.body.endDate);
+    var getSensorData ="";
+    var endDate;
+    var startDate;
+
+    if(req.body.startDate == null || req.body.endDate == null){
+        getSensorData = "select * from sensordata where sensorId = '" + sensorId + "';";
+    }else{
+        var endDate = eDate.getFullYear()+"-"+(eDate.getMonth()+1)+"-"+eDate.getDate();
+        var startDate = sDate.getFullYear()+"-"+(sDate.getMonth()+1)+"-"+sDate.getDate();
+        getSensorData = "select * from infraSense.sensordata where sensorId = '" + sensorId + "' and CAST(TimeStamp as Date) BETWEEN '"+startDate+"' and '"+endDate+"';";
+    }
     var sensorData = {};
     mysql.fetchData(function(err, results) {
         if (err) {
             throw err;
         } else {
-            if (results != null) {
+            if (results.length > 0) {
                 sensorData = results;
+                var json_response={"statusCode":200,"sensorData":sensorData, "unavailable":false};
+                res.send(json_response);
+            }else{
+                console.log("No Data available for this date range");
+                var json_response={"statusCode":200,"sensorData":sensorData,"unavailable":true};
+                res.send(json_response);
             }
-            var json_response={"statusCode":200,"sensorData":sensorData};
-            console.log("Hey there"+sensorData[0].TimeStamp);
-            res.send(json_response);
+
         }
     }, getSensorData);
 };

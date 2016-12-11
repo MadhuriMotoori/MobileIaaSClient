@@ -290,27 +290,34 @@ app.controller('managementController',['$scope','$http','$state','$cookies',func
     };
 
     $scope.getSensorData = function (sensorId) {
-        $scope.hideMonitoringDetails = true;
-        $scope.hideErrormessage = true;
-        $scope.hideGraphDetails = true;
-
-
+        $scope.hideErrMsg = true;
+        $scope.hideData = true;
         $http.post(
             '/getSensorData',
             {
                 sensorid: sensorId,
-                startDate : $scope.startDate,
+                startDate : $scope.sDate,
+                endDate : $scope.eDate,
                 username : $cookies.get('username')
             },
             { cors: true }
         )
             .success(function(data){
                 if(data.statusCode == 200) {
-                    $scope.hideMonitoringDetails = false;
-                    $scope.hideErrormessage = true;
+                    $scope.unavailable = data.unavailable;
+                    $scope.hideErrMsg = true;
                     $scope.hideData = false;
-                    $scope.hideGraphDetails = true;
                     $scope.sensorData = data.sensorData;
+
+                    if(data.unavailable){
+                        $scope.hideErrMsg = false;
+                        $scope.errMsg = "No Data Available for the date range selected!!   Please select a date range when the sensor was active";
+                        $scope.hideData = true;
+                    }
+                }else if(data.statusCode == 400){
+                    $scope.hideErrMsg = false;
+                    $scope.errMsg = "Please select a date range!";
+                    $scope.hideData = true;
                 }
             })
             .error(function(error){
