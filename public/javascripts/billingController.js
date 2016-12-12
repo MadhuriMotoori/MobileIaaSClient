@@ -19,6 +19,7 @@ app.controller('billingController',['$scope','$http','$state','$cookies',functio
             if (data.statusCode == 200) {
                 $scope.sensorHubList = data.sensorHubList;
                 $scope.totalCost = data.totalCost;
+                $scope.tax = data.tax;
             }
         }).error(function(error) {
         });

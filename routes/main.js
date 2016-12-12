@@ -151,7 +151,7 @@ exports.getSensorData = function(req,res){
 
 exports.getAllSensorHubBilling = function(req,res){
     var username = req.body.username;
-    var getSensorHubList = "SELECT SC.id, S.SensorHubName, SUM(SD.ChargePerHour*S.ActiveHours) AS Charges FROM sensor S JOIN sensordetails SD ON SD.SensorType = S.SensorType JOIN sensorcluster SC ON SC.SensorHubName = S.SensorHubName WHERE SC.UserName = '"+username+"' GROUP BY S.SensorHubName, SC.id;";
+    var getSensorHubList = "Select A.id, A.SensorHubName, SUM(A.Charges) AS 'ChargesPerSensorCluster' from (SELECT SC.id, S.SensorHubName, CASE WHEN S.StopTime IS NOT NULL THEN SUM(SD.ChargePerHour*S.ActiveHours) WHEN S.StopTime IS NULL THEN SUM(SD.ChargePerHour*S.ActiveHours) + SUM(SD.ChargePerHour* timestampdiff(SECOND,S.StartTime,now())/3600.0) END AS 'Charges' FROM sensor S JOIN sensordetails SD ON SD.SensorType = S.SensorType JOIN sensorcluster SC ON SC.SensorHubName = S.SensorHubName WHERE SC.UserName = '"+username+"' GROUP BY S.SensorHubName, SC.id, S.StopTime) A GROUP BY A.id, A.SensorHubName;";
     var total=0;
     console.log(getSensorHubList);
     var sensorHubList = [];
@@ -164,11 +164,13 @@ exports.getAllSensorHubBilling = function(req,res){
                     var sensorHub={}
                     sensorHub.id = results[i].id;
                     sensorHub.SensorHubName = results[i].SensorHubName;
-                    sensorHub.cost = results[i].Charges;
+                    sensorHub.cost = results[i].ChargesPerSensorCluster;
                     sensorHubList.push(sensorHub);
-                    total = total +parseInt(results[i].Charges);
+                    total = total +parseFloat(results[i].ChargesPerSensorCluster);
+                    tax = total * 0.15;
                 }
-                var json_response={"statusCode":200,"sensorHubList":sensorHubList,"totalCost":total};
+                console.log("total:::"+total+"Tax-------"+tax)
+                var json_response={"statusCode":200,"sensorHubList":sensorHubList,"totalCost":total, "tax":tax};
                 res.send(json_response);
 
             }else{
@@ -182,7 +184,7 @@ exports.getIndividualSensorHubBilling = function(req, res){
 
     var username = req.body.username;
     var hubname = req.body.sensorHubName;
-    var getSensorInstancesList = "select A.sensorId, A.activehours, B.ChargePerHour,(B.ChargePerHour * A.ActiveHours) AS 'Charges' from sensor A join sensordetails B where A.SensorType = B.SensorType and A.SensorHubName = '"+hubname+"';";;
+    var getSensorInstancesList = "select A.sensorId, CASE WHEN A.StopTime IS NOT NULL THEN A.ActiveHours WHEN A.StopTime IS NULL THEN A.ActiveHours + timestampdiff(SECOND,A.StartTime,now())/3600.0 END AS 'Active_Hours', B.ChargePerHour,CASE WHEN A.StopTime IS NOT NULL THEN B.ChargePerHour*A.ActiveHours WHEN A.StopTime IS NULL THEN (B.ChargePerHour*A.ActiveHours) + B.ChargePerHour*(timestampdiff(SECOND,A.StartTime,now())/3600.0) END AS 'Charges' from sensor A join sensordetails B where A.SensorType = B.SensorType and A.SensorHubName = '"+hubname+"' and A.UserName='"+username+"';";
     var total=0;
     console.log(getSensorInstancesList);
     var sensorInstanceslist = [];
@@ -194,11 +196,11 @@ exports.getIndividualSensorHubBilling = function(req, res){
                 for(var i=0;i<results.length;i++){
                     var sensorHub={}
                     sensorHub.sensorId = results[i].sensorId;
-                    sensorHub.usage = results[i].activehours;
+                    sensorHub.usage = results[i].Active_Hours;
                     sensorHub.chargesPerHour = results[i].ChargePerHour;
                     sensorHub.cost = results[i].Charges;
                     sensorInstanceslist.push(sensorHub);
-                    total = total +parseInt(results[i].Charges);
+                    total = total +parseFloat(results[i].Charges);
 
                 }
                 var json_response={"statusCode":200,"sensorInstanceslist":sensorInstanceslist,"totalCost":total};
@@ -217,7 +219,7 @@ exports.getTotalRevenue = function(req, res){
     mysql.fetchData(function(err, results) {
         if (err) {
             throw err;
-            
+
         } else  {
             if (results.length > 0) {
                 console.log("revenue::"+results[0].Charges);

@@ -3,7 +3,7 @@
 <div class="right_col" role="main" ng-init="init()" ng-controller="billingController">
     <div class="row">
         <h1>Invoice</h1>
-        <h1>Total: ${{totalCost + totalCost* 0.20 | number: 2}}</h1>
+        <h1>Total: ${{totalCost + tax | number: 2}}</h1>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
@@ -57,14 +57,14 @@
                             <tr>
                                 <td class=" "></td>
                                 <td class=" "></td>
-                                <td class=" "><b>Tax</b></td>
-                                <td class=" "><b>${{totalCost * 0.20 | number :2}}</b></td>
+                                <td class=" "><b>Data storage Service</b></td>
+                                <td class=" "><b>${{ tax | number :2}}</b></td>
                             </tr>
                             <tr>
                                 <td class=" "></td>
                                 <td class=" "></td>
                                 <td class=" "><h3>Total Cost</h3></td>
-                                <td class=" "><h3>${{totalCost + totalCost* 0.20 |number: 2}}</h3></td>
+                                <td class=" "><h3>${{totalCost + tax |number: 2}}</h3></td>
                             </tr>
                             </tbody>
                         </table>
