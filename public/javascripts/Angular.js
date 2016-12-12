@@ -346,5 +346,23 @@ app.config(function($stateProvider, $urlRouterProvider){
                 }
             },
             params: { test: "default value" }
+        })
+        .state('monitorAdminCluster', {
+            url: "/monitorClusterAdmin",
+            views:{
+                'navbar@':{
+                    templateUrl: 'navbar.ejs',
+                    controller: 'navBarController'
+                },
+                'sidemenu@':{
+                    templateUrl: 'adminsidebarView.ejs',
+                    controller: 'navBarController'
+                },
+                'main@':{
+                    templateUrl: 'monitorClusterAdmin.ejs',
+                    controller : 'monitorSensorAdminController'
+                }
+            },
+            params: { test: "default value" }
         });
 });
