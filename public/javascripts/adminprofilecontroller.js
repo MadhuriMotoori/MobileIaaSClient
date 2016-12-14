@@ -48,7 +48,7 @@
         };
         
 
-        $interval(updatedashboard,3*60*1000);
+        $interval(updatedashboard,15*1000);
         
         $scope.total_users = function(){
             $http.get(host+'api/v1/totalusers')
