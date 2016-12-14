@@ -128,7 +128,7 @@ exports.getSensorData = function(req,res){
     }else{
         var endDate = eDate.getFullYear()+"-"+(eDate.getMonth()+1)+"-"+eDate.getDate();
         var startDate = sDate.getFullYear()+"-"+(sDate.getMonth()+1)+"-"+sDate.getDate();
-        getSensorData = "select * from infraSense.sensordata where sensorId = '" + sensorId + "' and CAST(TimeStamp as Date) BETWEEN '"+startDate+"' and '"+endDate+"';";
+        getSensorData = "select * from sensordata where sensorId = '" + sensorId + "' and CAST(TimeStamp as Date) BETWEEN '"+startDate+"' and '"+endDate+"';";
     }
     var sensorData = {};
     mysql.fetchData(function(err, results) {
