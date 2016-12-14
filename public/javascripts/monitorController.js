@@ -144,7 +144,7 @@ app.controller('monitorController',['$scope','$http','$state','$cookies',functio
                     //alert(localISOTime);
                     //new Date().toISOString().slice(0,16);//"2015-04-12T11:42";
 
-                    $scope.displayerrormessage = "Sensor was launched on " + result.launchtime + ". Please select date and time after launch date.";
+                    $scope.displayerrormessage = "Sensor was launched on " + result.launchtime + " GMT. Please select date and time after launch date.";
 
                 } else if(result.statusCode == 202) {
                     $scope.hideMonitoringDetails = true;
